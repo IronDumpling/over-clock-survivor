@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8514814021105209785}
   - component: {fileID: 8514814021105209784}
   m_Layer: 0
-  m_Name: AttackEC
+  m_Name: AttackCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

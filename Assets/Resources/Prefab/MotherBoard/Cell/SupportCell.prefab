@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 4649754854841499059}
   - component: {fileID: 4649754854841499060}
   m_Layer: 0
-  m_Name: SupportEC
+  m_Name: SupportCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
