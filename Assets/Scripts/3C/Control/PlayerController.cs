@@ -24,12 +24,12 @@ public class PlayerController : MonoBehaviour
 
     private void UseCommand()
     {
-        EComponentCommand c = EComponentManager.Instance.ComsumeCommand();
+        CellCommand c = CellManager.Instance.ComsumeCommand();
         if (c != null)
         {
             switch (c.type)
             {
-                case EComponentType.Attack:
+                case CellType.Attack:
 
                     for (int i = 0; i < c.multiTimes; i++)
                     {

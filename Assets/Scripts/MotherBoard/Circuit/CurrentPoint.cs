@@ -18,12 +18,12 @@ public class CurrentPoint : MonoSingleton<CurrentPoint>
         if(hitInfo.collider != null) {
             if (previousNormal != hitInfo.normal)
             {
-                EComponentManager.Instance.ResetECListRun();
+                CellManager.Instance.ResetECListRun();
                 Debug.Log("reset");
             }
             previousNormal = hitInfo.normal;
             
-            hitInfo.transform.GetComponent<EComponentBlock>().RunBlock();
+            hitInfo.transform.GetComponent<CellBlock>().RunBlock();
             
             
         }

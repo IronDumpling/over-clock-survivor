@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackEComponent : EComponent
+public class AttackCell : Cell
 {
     private void Awake()
     {
-        type = EComponentType.Attack;
+        type = CellType.Attack;
     }
     
     protected override void ActivateSelf()
     {
-        EComponentCommand c = new EComponentCommand();
-        c.type = EComponentType.Attack;
+        CellCommand c = new CellCommand();
+        c.type = CellType.Attack;
         c.multiTimes = 1;
         c.scaleMultiTimes = 1;
         c.dmg = 1;
-        EComponentManager.Instance.AddCommand(c);
+        CellManager.Instance.AddCommand(c);
     }
 }

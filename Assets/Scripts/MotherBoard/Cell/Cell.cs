@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EComponent : MonoBehaviour
+public abstract class Cell : MonoBehaviour
 {
    
-    public EComponentType type = EComponentType.None;
+    public CellType type = CellType.None;
 
     public void RunByCurrent()
     {

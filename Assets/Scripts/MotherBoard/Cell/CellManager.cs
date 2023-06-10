@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EComponentManager : Common.Singleton<EComponentManager>
+public class CellManager : Common.Singleton<CellManager>
 {
-    private List<EComponentBlock> ecList;
-    public List<EComponentCommand> ecCommand;
+    private List<CellBlock> ecList;
+    public List<CellCommand> ecCommand;
 
     protected override void Init()
     {
-        ecList = new List<EComponentBlock>();
-        ecCommand = new List<EComponentCommand>();
+        ecList = new List<CellBlock>();
+        ecCommand = new List<CellCommand>();
 
-        tempCommand = new EComponentCommand();
+        tempCommand = new CellCommand();
     }
 
-    public void RegisterEC(EComponentBlock ec)
+    public void RegisterEC(CellBlock ec)
     {
         ecList.Add(ec);
     }
     
-    public void DeleteEC(EComponentBlock ec)
+    public void DeleteEC(CellBlock ec)
     {
         ecList.Remove(ec);
         
@@ -36,34 +36,34 @@ public class EComponentManager : Common.Singleton<EComponentManager>
     }
 
 
-    public void AddCommand(EComponentCommand command)
+    public void AddCommand(CellCommand command)
     {
         ecCommand.Add(command);
     }
 
-    private EComponentCommand tempCommand;
+    private CellCommand tempCommand;
     private bool haveTempCommand = false;
 
-    public EComponentCommand ComsumeCommand()
+    public CellCommand ComsumeCommand()
     {
         if (ecCommand.Count == 0) return null;
-        EComponentCommand c = ecCommand[0];
+        CellCommand c = ecCommand[0];
         ecCommand.Remove(c);
 
         switch (c.type)
         {
-            case EComponentType.Attack:
+            case CellType.Attack:
                 if (haveTempCommand)
                 {
                     c.dmg += tempCommand.dmg;
                     c.multiTimes *= tempCommand.multiTimes;
                     c.scaleMultiTimes *= tempCommand.scaleMultiTimes;
                     haveTempCommand = false;
-                    tempCommand = new EComponentCommand();
+                    tempCommand = new CellCommand();
                 }
                 
                 return c;
-            case EComponentType.Support:
+            case CellType.Support:
                 tempCommand.dmg += c.dmg;
                 tempCommand.multiTimes *= c.multiTimes;
                 tempCommand.scaleMultiTimes *= c.scaleMultiTimes;
@@ -75,23 +75,23 @@ public class EComponentManager : Common.Singleton<EComponentManager>
     }
 }
 
-public enum EComponentType
+public enum CellType
 {
     Attack,
     Support,
     Shield,
     None
 }
-public class EComponentCommand
+public class CellCommand
 {
-    public EComponentType type;
+    public CellType type;
     public int multiTimes;
     public float scaleMultiTimes;
     public float dmg;
 
-    public EComponentCommand()
+    public CellCommand()
     {
-        type = EComponentType.None;
+        type = CellType.None;
         multiTimes = 1;
         scaleMultiTimes = 1;
         dmg = 1;
