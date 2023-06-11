@@ -35,7 +35,7 @@ public class GridCellManager : MonoSingleton<GridCellManager>
             }
 		}
 
-		CameraManager.Instance.followPoint.position = _midPoint;
+		CameraManager.Instance.boardFollowPoint.position = _midPoint;
 	}
 
 	public Cell GetTileAtPosition(Vector2 pos)

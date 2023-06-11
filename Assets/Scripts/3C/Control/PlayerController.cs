@@ -40,19 +40,29 @@ public class PlayerController : MonoBehaviour
                         go.GetComponent<Danmaku>().dmg = c.dmg;
                     }
 
-                    //
                     break;
             }
         }
     }
     
-
+    private void HandleMotherBoard()
+    {
+        int idx = CameraManager.Instance.GetCurCameraIdx();
+        if (idx == 0)
+            CameraManager.Instance.SwitchCameraByIdx(idx + 1);
+        else
+            CameraManager.Instance.SwitchCameraByIdx(idx - 1);
+    }
 
     private void FixedUpdate()
     {
+        // Player Move 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         HandleMovement(horizontal, vertical);
+
+        // Call MotherBroad
+        if (Input.GetKeyDown(KeyCode.Space)) HandleMotherBoard();
     }
 
     private void HandleMovement(float horizontal, float vertical)

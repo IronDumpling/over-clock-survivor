@@ -326,6 +326,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41044cdf73c3442ba847e5d1a1fd405f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curCamera: {fileID: 0}
+  cameraList:
+  - {fileID: 7346500284308027936}
+  - {fileID: 2938029715224054690}
+  defaultBlend:
+    m_Style: 0
+    m_Time: 0
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!1 &4618162628426987635
 GameObject:
   m_ObjectHideFlags: 0
