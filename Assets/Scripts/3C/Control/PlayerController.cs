@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Common;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoSingleton<PlayerController>
 {
     [SerializeField] private float moveSpeed = 5f;
 
@@ -44,28 +45,8 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
-    private void HandleMotherBoard()
-    {
-        int idx = CameraManager.Instance.GetCurCameraIdx();
-        if (idx == 0)
-            CameraManager.Instance.SwitchCameraByIdx(idx + 1);
-        else
-            CameraManager.Instance.SwitchCameraByIdx(idx - 1);
-    }
 
-    private void FixedUpdate()
-    {
-        // Player Move 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        HandleMovement(horizontal, vertical);
-
-        // Call MotherBroad
-        if (Input.GetKeyDown(KeyCode.Space)) HandleMotherBoard();
-    }
-
-    private void HandleMovement(float horizontal, float vertical)
+    public void HandleMovement(float horizontal, float vertical)
     {
         rb.velocity = new Vector2(horizontal, vertical) * moveSpeed;
     }
