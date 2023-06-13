@@ -29,6 +29,8 @@ public class DanmakuManager : MonoBehaviour
 
     private void SpawnDanmaku(CellCommand c, Vector3 position)
     {
+        GameObject closestEnemy = EnemyManager.Instance.GetClosestEnemy();
+
         float randomAngle = Random.Range(0f, 360f);
         Vector3 randomEuler = new Vector3(0, 0, randomAngle);
 

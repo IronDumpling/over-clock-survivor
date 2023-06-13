@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Danmaku : MonoBehaviour
 {
-    public float dmg = 0;
+    public float dmg = 5;
+    public float speed = 10f;
+
     private void Awake()
     {
         Invoke(nameof(DestroySelf), 5f);

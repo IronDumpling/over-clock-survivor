@@ -4,13 +4,13 @@ using Pathfinding;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _health;
-    [SerializeField] private float _dmg;
+    public float dmg;
     const int BULLET_LAYER = 6;
 
     private void Start()
     {
         _health = 10;
-        _dmg = 5;
+        dmg = 5;
         gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find("BattleStage/Player/PlayerSprite").transform;
     }
 
@@ -24,11 +24,6 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.layer == BULLET_LAYER)
         {
             if(_health > 0)_health -= collision.gameObject.GetComponent<Danmaku>().dmg;
-        }
-
-        if (collision.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<PlayerHealth>().health -= _dmg;
         }
     }
 

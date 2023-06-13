@@ -40,4 +40,10 @@ public class EnemyManager : MonoSingleton<EnemyManager>
         spwanedEnemy.transform.SetParent(gameObject.transform);
         enemies.Add(spwanedEnemy);
     }
+
+    public GameObject GetClosestEnemy()
+    {
+        GameObject closestObj = null;
+        return closestObj;
+    }
 }

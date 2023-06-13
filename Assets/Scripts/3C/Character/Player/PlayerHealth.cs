@@ -5,6 +5,7 @@ public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
     public float health;
+    const int ENEMY_LAYER = 8;
 
     void Start()
     {
@@ -15,5 +16,13 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         if (health <= 0) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == ENEMY_LAYER)
+        {
+            health -= collision.gameObject.GetComponent<Enemy>().dmg;
+        }
     }
 }
