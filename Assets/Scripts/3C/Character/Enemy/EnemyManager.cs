@@ -1,20 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Common;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoSingleton<EnemyManager>
 {
-    public GameObject enemyPrefab;
     public float spawnInterval = 5f;
     private Timer spawnTimer;
-    public Transform Player; 
+
+    [SerializeField] private Transform Player;
+    [SerializeField] private GameObject enemyPrefab;
+
+    public List<GameObject> enemies;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnTimer = new Timer(spawnInterval, SpawnEnemy);
         spawnTimer.Start();
-        Player = GameObject.Find("BattleStage/Player").transform;
+        Player = GameObject.Find("BattleStage/Player/PlayerSprite").transform;
     }
 
     // Update is called once per frame
@@ -35,33 +38,6 @@ public class EnemyManager : MonoBehaviour
         Vector3 randomPosition = RandomPosition();
         GameObject spwanedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
         spwanedEnemy.transform.SetParent(gameObject.transform);
-    }
-}
-
-public class Timer
-{
-    private float interval;
-    private float currentTime;
-    private System.Action callback;
-
-    public Timer(float interval, System.Action callback)
-    {
-        this.interval = interval;
-        this.callback = callback;
-    }
-
-    public void Start()
-    {
-        currentTime = interval;
-    }
-
-    public void Update(float deltaTime)
-    {
-        currentTime -= deltaTime;
-        if (currentTime <= 0f)
-        {
-            callback.Invoke();
-            currentTime = interval;
-        }
+        enemies.Add(spwanedEnemy);
     }
 }

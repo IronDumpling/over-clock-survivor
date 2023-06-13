@@ -35,7 +35,6 @@ public class CellManager : Common.Singleton<CellManager>
         }
     }
 
-
     public void AddCommand(CellCommand command)
     {
         cellCommand.Add(command);
@@ -63,6 +62,7 @@ public class CellManager : Common.Singleton<CellManager>
                 }
                 
                 return c;
+
             case CellType.Support:
                 tempCommand.dmg += c.dmg;
                 tempCommand.multiTimes *= c.multiTimes;

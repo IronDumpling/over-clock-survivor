@@ -13,19 +13,15 @@ public class CurrentPoint : MonoSingleton<CurrentPoint>
     private Vector2 previousNormal = Vector2.zero;
     private void Update()
     {
-        
-        RaycastHit2D  hitInfo = Physics2D.Raycast(transform.position, -transform.up, 0.6f,mask.value);
+        RaycastHit2D  hitInfo = Physics2D.Raycast(transform.position, -transform.up, 0.6f, mask.value);
         if(hitInfo.collider != null) {
             if (previousNormal != hitInfo.normal)
             {
                 CellManager.Instance.ResetCellListRun();
-                Debug.Log("reset");
             }
             previousNormal = hitInfo.normal;
             
             hitInfo.transform.GetComponent<CellBlock>().RunBlock();
-            
-            
         }
     }
 
