@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     {
         _health = 10;
         dmg = 5;
-        gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find("BattleStage/Player").transform;
+        gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find("BattleStage/Player/PlayerSprite").transform;
     }
 
     private void Update()

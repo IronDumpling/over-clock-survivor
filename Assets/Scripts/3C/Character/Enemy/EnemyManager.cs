@@ -33,7 +33,8 @@ public class EnemyManager : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 randomPosition = RandomPosition();
-        Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+        GameObject spwanedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+        spwanedEnemy.transform.SetParent(gameObject.transform);
     }
 }
 

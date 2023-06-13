@@ -18,7 +18,7 @@ public class CurrentPoint : MonoSingleton<CurrentPoint>
         if(hitInfo.collider != null) {
             if (previousNormal != hitInfo.normal)
             {
-                CellManager.Instance.ResetECListRun();
+                CellManager.Instance.ResetCellListRun();
                 Debug.Log("reset");
             }
             previousNormal = hitInfo.normal;

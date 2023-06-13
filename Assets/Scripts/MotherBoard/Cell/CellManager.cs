@@ -5,40 +5,40 @@ using UnityEngine;
 
 public class CellManager : Common.Singleton<CellManager>
 {
-    private List<CellBlock> ecList;
-    public List<CellCommand> ecCommand;
+    private List<CellBlock> cellList;
+    public List<CellCommand> cellCommand;
 
     protected override void Init()
     {
-        ecList = new List<CellBlock>();
-        ecCommand = new List<CellCommand>();
+        cellList = new List<CellBlock>();
+        cellCommand = new List<CellCommand>();
 
         tempCommand = new CellCommand();
     }
 
-    public void RegisterEC(CellBlock ec)
+    public void RegisterCell(CellBlock cell)
     {
-        ecList.Add(ec);
+        cellList.Add(cell);
     }
     
-    public void DeleteEC(CellBlock ec)
+    public void DeleteCell(CellBlock cell)
     {
-        ecList.Remove(ec);
+        cellList.Remove(cell);
         
     }
 
-    public void ResetECListRun()
+    public void ResetCellListRun()
     {
-        foreach (var ec in ecList)
+        foreach (var cell in cellList)
         {
-            ec.CanRun = true;
+            cell.CanRun = true;
         }
     }
 
 
     public void AddCommand(CellCommand command)
     {
-        ecCommand.Add(command);
+        cellCommand.Add(command);
     }
 
     private CellCommand tempCommand;
@@ -46,9 +46,9 @@ public class CellManager : Common.Singleton<CellManager>
 
     public CellCommand ComsumeCommand()
     {
-        if (ecCommand.Count == 0) return null;
-        CellCommand c = ecCommand[0];
-        ecCommand.Remove(c);
+        if (cellCommand.Count == 0) return null;
+        CellCommand c = cellCommand[0];
+        cellCommand.Remove(c);
 
         switch (c.type)
         {
@@ -82,6 +82,7 @@ public enum CellType
     Shield,
     None
 }
+
 public class CellCommand
 {
     public CellType type;

@@ -7,12 +7,12 @@ public class CellBlock : MonoBehaviour
     public bool CanRun { get; set; }
     private void OnEnable()
     {
-        CellManager.Instance.RegisterEC(this);
+        CellManager.Instance.RegisterCell(this);
     }
 
     private void OnDisable()
     {
-        CellManager.Instance.DeleteEC(this);
+        CellManager.Instance.DeleteCell(this);
     }
 
 

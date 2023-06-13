@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.7
   height: 2
   canMove: 1
   maxSpeed: 1
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 0
+  dmg: 0
 --- !u!50 &8307709392937957546
 Rigidbody2D:
   serializedVersion: 4
