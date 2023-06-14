@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NoDestroyMonoSingleton<GameManager>
 {
@@ -25,6 +26,16 @@ public class GameManager : NoDestroyMonoSingleton<GameManager>
     public void StartLevel()
     {
         GridManager.Instance.GenerateGrid();
+    }
+
+    public void RestartGame()
+    {
+
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void PauseGame()
