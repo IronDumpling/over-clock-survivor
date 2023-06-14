@@ -21,7 +21,7 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
             }
             previousNormal = hitInfo.normal;
             
-            hitInfo.transform.GetComponent<CardCell>().RunBlock();
+            hitInfo.transform.GetComponent<CardCell>().Execute();
         }
     }
 

@@ -5,46 +5,56 @@ using UnityEngine;
 public class CardCellSO : ScriptableObject
 {
     public string cardTitle;
-    public bool isUpgraded;
     public CardDescription cardDescription;
     public CardAmount cardCost;
+
     public CardAmount cardEffect;
     public CardAmount buffAmount;
     public Sprite cardIcon;
+
+    public CardShape cardShape;
+    public enum CardShape
+    {
+        L4, L5,
+        T4, T5,
+        I4, 
+        O4, O6, O8,
+        Z4
+    }
+
     public CardType cardType;
-    public enum CardType { Attack, Skill, Power }
-    public CardClass cardClass;
-    public enum CardClass { ironChad, silent, colorless, curse, status }
+    public enum CardType
+    {
+        Attack,
+        Shield,
+        Support,
+        Recover,
+        Move,
+        Resource,
+        None
+    }
+
     public CardTargetType cardTargetType;
-    public enum CardTargetType { self, enemy };
+    public enum CardTargetType
+    {
+        self, enemy
+    };
 
     public int GetCardCostAmount()
     {
-        if (!isUpgraded)
-            return cardCost.baseAmount;
-        else
-            return cardCost.upgradedAmount;
+        return cardCost.baseAmount; 
     }
     public int GetCardEffectAmount()
     {
-        if (!isUpgraded)
-            return cardEffect.baseAmount;
-        else
-            return cardEffect.upgradedAmount;
+         return cardEffect.baseAmount;
     }
     public string GetCardDescriptionAmount()
     {
-        if (!isUpgraded)
-            return cardDescription.baseAmount;
-        else
-            return cardDescription.upgradedAmount;
+        return cardDescription.baseAmount;
     }
     public int GetBuffAmount()
     {
-        if (!isUpgraded)
-            return buffAmount.baseAmount;
-        else
-            return buffAmount.upgradedAmount;
+         return buffAmount.baseAmount;
     }
 }
 
@@ -52,14 +62,14 @@ public class CardCellSO : ScriptableObject
 public struct CardAmount
 {
     public int baseAmount;
-    public int upgradedAmount;
 }
+
 [System.Serializable]
 public struct CardDescription
 {
     public string baseAmount;
-    public string upgradedAmount;
 }
+
 [System.Serializable]
 public struct CardBuffs
 {

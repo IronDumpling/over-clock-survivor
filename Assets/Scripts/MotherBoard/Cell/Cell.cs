@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class Cell : MonoBehaviour
 {
-   
     public CellType type = CellType.None;
     [SerializeField] protected SpriteRenderer _renderer;
 
