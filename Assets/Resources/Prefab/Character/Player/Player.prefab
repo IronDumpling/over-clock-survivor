@@ -57,8 +57,8 @@ GameObject:
   - component: {fileID: 5590382696240917284}
   - component: {fileID: 5590382696240917282}
   - component: {fileID: 5590382696240917285}
-  - component: {fileID: 5590382696240917283}
-  - component: {fileID: 5590382696240917286}
+  - component: {fileID: 7036836021412953025}
+  - component: {fileID: 7350726893778975078}
   m_Layer: 3
   m_Name: PlayerSprite
   m_TagString: Player
@@ -180,7 +180,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5590382696240917283
+--- !u!114 &7036836021412953025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,11 +189,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5590382696240917280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee900dc5c58d6d45a164aa50a0be9d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 64bc645b696b54668aeca288a56b0d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
---- !u!114 &5590382696240917286
+--- !u!114 &7350726893778975078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f24af7417f84c25a3e5aeb20f4dd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 100
 --- !u!1 &6835003913264326474
 GameObject:
   m_ObjectHideFlags: 0

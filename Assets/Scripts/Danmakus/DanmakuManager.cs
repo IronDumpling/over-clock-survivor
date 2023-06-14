@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+
 
 public class DanmakuManager : MonoBehaviour
 {
@@ -29,15 +30,14 @@ public class DanmakuManager : MonoBehaviour
 
     private void SpawnDanmaku(CellCommand c, Vector3 position)
     {
-        GameObject closestEnemy = EnemyManager.Instance.GetClosestEnemy();
-
-        float randomAngle = Random.Range(0f, 360f);
-        Vector3 randomEuler = new Vector3(0, 0, randomAngle);
-
-        GameObject go = Instantiate(attackPrefab, position, Quaternion.Euler(randomEuler));
-
-        go.transform.SetParent(gameObject.transform);
-        go.transform.localScale *= c.scaleMultiTimes;
-        go.GetComponent<Danmaku>().dmg = c.dmg;
+        GameObject danmaku = Instantiate(attackPrefab, position, Quaternion.identity);
+        danmaku.transform.SetParent(gameObject.transform);
+        danmaku.transform.localScale *= c.scaleMultiTimes;
+        danmaku.GetComponent<Danmaku>().dmg = c.dmg;
     }
 }
+
+
+
+
+

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Pathfinding;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDanInteractable
 {
     [SerializeField] private float _health;
     public float dmg;

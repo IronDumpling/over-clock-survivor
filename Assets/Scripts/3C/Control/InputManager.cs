@@ -10,7 +10,7 @@ public class InputManager : MonoSingleton<InputManager>
         // Player Move 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        PlayerController.Instance.HandleMovement(horizontal, vertical);
+        Player.Instance.HandleMovement(horizontal, vertical);
 
         // Call MotherBroad
         if (Input.GetKeyDown(KeyCode.Space)) HandleMotherBoard();
@@ -28,7 +28,6 @@ public class InputManager : MonoSingleton<InputManager>
         {
             CameraManager.Instance.SwitchCameraByIdx(idx - 1);
             GameManager.Instance.ResumeGame();
-        }
-            
+        }   
     }
 }
