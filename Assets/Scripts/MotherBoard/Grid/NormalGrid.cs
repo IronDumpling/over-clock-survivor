@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridCell : Cell
+public class NormalGrid : Grid
 {
     [SerializeField] private Color _baseColor, _offsetColor;
     private bool _isOffset;

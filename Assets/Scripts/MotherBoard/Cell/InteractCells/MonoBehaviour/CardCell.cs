@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellBlock : MonoBehaviour
+public class CardCell : Cell
 {
     public bool CanRun { get; set; }
     private void OnEnable()
@@ -15,11 +15,21 @@ public class CellBlock : MonoBehaviour
         CellManager.Instance.DeleteCell(this);
     }
 
-
     public void RunBlock()
     {
         if (!CanRun) return;
-        this.transform.parent.GetComponent<Cell>().RunByCurrent();
+        Execute();
         CanRun = false;
+    }
+
+    public void Execute()
+    {
+        Debug.Log(transform.name + "被激活");
+        ActivateSelf();
+    }
+
+    protected virtual void ActivateSelf()
+    {
+
     }
 }

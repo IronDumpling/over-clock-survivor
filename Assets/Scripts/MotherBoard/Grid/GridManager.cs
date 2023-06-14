@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Common;
 
-public class GridCellManager : MonoSingleton<GridCellManager>
+public class GridManager : MonoSingleton<GridManager>
 {
 	[SerializeField] private int _width, _height;
-	[SerializeField] private Cell _tilePrefab;
+	[SerializeField] private Grid _tilePrefab;
 	private Vector3 _midPoint;
-    private Dictionary<Vector2, Cell> _tiles;
+    private Dictionary<Vector2, Grid> _tiles;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class GridCellManager : MonoSingleton<GridCellManager>
 
     public void GenerateGrid()
 	{
-		_tiles = new Dictionary<Vector2, Cell>();
+		_tiles = new Dictionary<Vector2, Grid>();
 
 		for(int col = 0; col < _width; col++)
 		{
@@ -38,7 +38,7 @@ public class GridCellManager : MonoSingleton<GridCellManager>
 		CameraManager.Instance.boardFollowPoint.position = _midPoint;
 	}
 
-	public Cell GetTileAtPosition(Vector2 pos)
+	public Grid GetTileAtPosition(Vector2 pos)
 	{
 		if (_tiles.TryGetValue(pos, out var tile)) return tile;
 		return null;

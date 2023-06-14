@@ -24,7 +24,7 @@ public class GameManager : NoDestroyMonoSingleton<GameManager>
 
     public void StartLevel()
     {
-        GridCellManager.Instance.GenerateGrid();
+        GridManager.Instance.GenerateGrid();
     }
 
     public void PauseGame()

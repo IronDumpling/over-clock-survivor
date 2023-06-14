@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackCell : Cell
+public class AttackCell : CardCell
 {
     private void Awake()
     {

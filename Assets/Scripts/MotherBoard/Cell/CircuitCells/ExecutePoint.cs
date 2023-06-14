@@ -6,7 +6,7 @@ using Common;
 using UnityEngine;
 using Color = UnityEngine.Color;
 
-public class CurrentPoint : MonoSingleton<CurrentPoint>
+public class ExecutePoint : MonoSingleton<ExecutePoint>
 {
     public LayerMask mask;
 
@@ -21,7 +21,7 @@ public class CurrentPoint : MonoSingleton<CurrentPoint>
             }
             previousNormal = hitInfo.normal;
             
-            hitInfo.transform.GetComponent<CellBlock>().RunBlock();
+            hitInfo.transform.GetComponent<CardCell>().RunBlock();
         }
     }
 

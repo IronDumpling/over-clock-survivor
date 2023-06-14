@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SupportCell : Cell
+public class SupportCell : CardCell
 {
     [SerializeField] private int multiTimes = 2;
     [SerializeField] private float scaleMultiTimes = 1.2f;

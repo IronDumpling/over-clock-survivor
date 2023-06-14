@@ -18,15 +18,4 @@ public abstract class Cell : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
     }
-
-    public void RunByCurrent()
-    {
-        Debug.Log(transform.name + "被激活");
-        ActivateSelf();
-    }
-
-    protected virtual void ActivateSelf()
-    {
-        
-    }
 }

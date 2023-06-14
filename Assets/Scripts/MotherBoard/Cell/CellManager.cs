@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class CellManager : Common.Singleton<CellManager>
 {
-    private List<CellBlock> cellList;
+    private List<CardCell> cellList;
     public List<CellCommand> cellCommand;
 
     protected override void Init()
     {
-        cellList = new List<CellBlock>();
+        cellList = new List<CardCell>();
         cellCommand = new List<CellCommand>();
 
         tempCommand = new CellCommand();
     }
 
-    public void RegisterCell(CellBlock cell)
+    public void RegisterCell(CardCell cell)
     {
         cellList.Add(cell);
     }
     
-    public void DeleteCell(CellBlock cell)
+    public void DeleteCell(CardCell cell)
     {
         cellList.Remove(cell);
         
