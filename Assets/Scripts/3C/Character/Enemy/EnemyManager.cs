@@ -41,9 +41,22 @@ public class EnemyManager : MonoSingleton<EnemyManager>
         enemies.Add(spwanedEnemy);
     }
 
-    public GameObject GetClosestEnemy()
+    public GameObject GetClosestEnemy(Transform targetTrans)
     {
         GameObject closestObj = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach(GameObject enemy in enemies)
+        {
+            float distance = Vector3.Distance(targetTrans.position, enemy.transform.position);
+
+            if(distance < closestDistance)
+            {
+                closestObj = enemy;
+                closestDistance = distance;
+            }
+        }
+
         return closestObj;
     }
 }

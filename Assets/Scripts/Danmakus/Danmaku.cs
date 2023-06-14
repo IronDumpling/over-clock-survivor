@@ -28,7 +28,7 @@ public class Danmaku : MonoBehaviour
 
     void GetDirection()
     {
-        GameObject closestEnemy = EnemyManager.Instance.GetClosestEnemy();
+        GameObject closestEnemy = EnemyManager.Instance.GetClosestEnemy(transform);
 
         if (closestEnemy)
         {
@@ -42,11 +42,5 @@ public class Danmaku : MonoBehaviour
             randomDirection.Normalize();
             GetComponent<Rigidbody2D>().velocity = randomDirection * speed;
         }
-
-    }
-
-    void DanmakuMove()
-    {
-        transform.position += transform.up * Time.deltaTime;
     }
 }
