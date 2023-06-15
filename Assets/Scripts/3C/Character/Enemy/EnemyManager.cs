@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 using Common;
 
 public class EnemyManager : MonoSingleton<EnemyManager>
 {
-    public float spawnInterval = 5f;
-    private Timer spawnTimer;
-    private Transform _player;
-
-    [SerializeField] private string _target = "Player/PlayerSprite";
     [SerializeField] private GameObject enemyPrefab;
-
+    
+    private Timer spawnTimer;
+    private GridGraph nav;
+    public float spawnInterval = 5f;
     public List<GameObject> enemies;
 
     // Start is called before the first frame update
@@ -18,7 +17,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     {
         spawnTimer = new Timer(spawnInterval, SpawnEnemy);
         spawnTimer.Start();
-        _player = GameObject.Find(_target).transform;
+        nav = (GridGraph)GetComponent<AstarPath>().graphs[0];
     }
 
     // Update is called once per frame
@@ -29,9 +28,9 @@ public class EnemyManager : MonoSingleton<EnemyManager>
 
     Vector3 RandomPosition()
     {
-        float x = Random.Range(-15f, 15f);
-        float y = Random.Range(-15f, 15f);
-        return new Vector3(x + _player.position.x, y + _player.position.y, 0f);
+        float x = Random.Range(-nav.width/2f, nav.width/2f);
+        float y = Random.Range(-nav.depth/2f, nav.depth/2f);
+        return new Vector3(x + transform.position.x, y + transform.position.y, 0f);
     }
 
     void SpawnEnemy()
@@ -39,6 +38,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
         Vector3 randomPosition = RandomPosition();
         GameObject spwanedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
         spwanedEnemy.transform.SetParent(gameObject.transform);
+        spwanedEnemy.name = $"Enemy_{enemies.Count}";
         enemies.Add(spwanedEnemy);
     }
 

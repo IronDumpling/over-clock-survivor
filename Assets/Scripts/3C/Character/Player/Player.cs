@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class Player : MonoSingleton<Player>, IDanInteractable
 {
     public PlayerSO playerData;
+    private int m_level;
+    private float m_energy;
+    private float m_freq;
     private float m_moveSpeed;
     private float m_currHealth;
     private float m_fullHealth;
@@ -33,9 +36,69 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     private void Birth()
     {
+        m_level = playerData.voltage.level;
+        m_energy = playerData.voltage.energy;
+        m_freq = playerData.frequency.currFreq;
         m_moveSpeed = playerData.moveSpeed;
         m_currHealth = playerData.currHealth;
         m_fullHealth = playerData.fullHealth;
+    }
+
+    private void GainEnergy(float energy)
+    {
+        m_energy = Mathf.Min(m_energy + energy,
+                             playerData.voltage.energyLimits[m_level - 1]);
+        playerData.voltage.energy = m_energy;
+    }
+
+    private void CleanEnergy()
+    {
+        m_energy = 0f;
+        playerData.voltage.energy = m_energy;
+    }
+
+    private void LevelUp(int level)
+    {
+        m_level += level;
+        playerData.voltage.level = m_level;
+        OverClock();
+        CleanEnergy();
+    }
+
+    private void FreqDown(float freq)
+    {
+        m_freq = Mathf.Max(m_freq - freq * Time.deltaTime,
+                           playerData.frequency.lowerBounds[m_level - 1]);
+        playerData.frequency.currFreq = m_freq;
+    }
+
+    private void FreqUp(float freq)
+    {
+        m_freq = Mathf.Min(m_freq + freq,
+                           playerData.frequency.upperBounds[m_level - 1]);
+        playerData.frequency.currFreq = m_freq;
+    }
+
+    private void OverClock()
+    {
+        m_freq = playerData.frequency.upperBounds[m_level - 1];
+    }
+
+    private void CurrHealthUp(float recover)
+    {
+        m_currHealth = Mathf.Min(m_currHealth + recover, m_fullHealth);
+        playerData.currHealth = m_currHealth;
+    }
+
+    private void CurrHealthDown(float dmg)
+    {
+        m_currHealth = Mathf.Max(m_currHealth - dmg, 0f);
+        playerData.currHealth = m_currHealth;
+    }
+
+    private void FullHealthUp()
+    {
+        m_fullHealth = playerData.fullHealthList[m_level - 1];
     }
 
     private void Death()
@@ -52,8 +115,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     {
         if (collision.gameObject.layer == ENEMY_LAYER)
         {
-            m_currHealth -= collision.gameObject.GetComponent<Enemy>().enemyData.dmg;
-            playerData.currHealth = m_currHealth;
+            CurrHealthDown(collision.gameObject.GetComponent<Enemy>().enemyData.dmg);
             if (m_currHealth <= 0) Death();
         }
     }

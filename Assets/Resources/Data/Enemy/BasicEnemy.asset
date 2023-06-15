@@ -15,5 +15,6 @@ MonoBehaviour:
   currHealth: 10
   fullHealth: 10
   moveSpeed: 2.5
+  enemyName: Killer
   dmg: 5
   target: Player/PlayerSprite
