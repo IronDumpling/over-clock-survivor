@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0e9ba92bcdd430eb82e17d342eddca, type: 3}
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
+  moveSpeed: 2.5
   currHealth: 10
   fullHealth: 10
-  moveSpeed: 2.5
   enemyName: Killer
-  dmg: 5
   target: Player/PlayerSprite
+  dmg: 5
+  energy:
+    amount: 25
+    quantity: 2
+    energyColor: {r: 0.9056604, g: 0.850273, b: 0.3972944, a: 0}
+    energySprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}

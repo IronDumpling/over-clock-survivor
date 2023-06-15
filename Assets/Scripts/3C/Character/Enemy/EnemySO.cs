@@ -6,6 +6,24 @@ using UnityEngine;
 public class EnemySO : CharacterSO
 {
     public string enemyName;
-    public float dmg;
     public string target;
+    public float dmg;
+    public EnergyParticles energy;
+
+    [System.Serializable]
+    public struct EnergyParticles
+    {
+        /// <summary>
+        /// The amount of energy of each energy particle
+        /// </summary>
+        public float amount;
+        /// <summary>
+        /// The quantity of particle that would be spawned
+        /// </summary>
+        public int quantity;
+        public Color color;
+        public Sprite sprite;
+    }
 }
+
+

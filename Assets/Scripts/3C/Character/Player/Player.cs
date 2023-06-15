@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.ParticleSystem;
 
 public class Player : MonoSingleton<Player>, IDanInteractable
 {
@@ -18,6 +19,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     private Rigidbody2D rb;
 
     const int ENEMY_LAYER = 8;
+    const int ENERGY_PARTICLE_LAYER = 9;
 
     protected override void Init()
     {
@@ -44,6 +46,8 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         m_fullHealth = playerData.fullHealth;
     }
 
+    #region Voltage
+
     private void GainEnergy(float energy)
     {
         m_energy = Mathf.Min(m_energy + energy,
@@ -65,6 +69,10 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         CleanEnergy();
     }
 
+    #endregion
+
+    #region Frequency
+
     private void FreqDown(float freq)
     {
         m_freq = Mathf.Max(m_freq - freq * Time.deltaTime,
@@ -83,6 +91,10 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     {
         m_freq = playerData.frequency.upperBounds[m_level - 1];
     }
+
+    #endregion
+
+    #region Health
 
     private void CurrHealthUp(float recover)
     {
@@ -106,10 +118,16 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         GameManager.Instance.RestartLevel();
     }
 
+    #endregion
+
+    #region Movement
+
     public void HandleMovement(float horizontal, float vertical)
     {
         rb.velocity = new Vector2(horizontal, vertical) * m_moveSpeed;
     }
+
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -117,6 +135,12 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         {
             CurrHealthDown(collision.gameObject.GetComponent<Enemy>().enemyData.dmg);
             if (m_currHealth <= 0) Death();
+        }
+        else if (collision.gameObject.layer == ENERGY_PARTICLE_LAYER)
+        {
+            EnergyParticle energy = collision.gameObject?.GetComponent<EnergyParticle>();
+            GainEnergy(energy.energyAmount);
+            energy.Death();
         }
     }
 }

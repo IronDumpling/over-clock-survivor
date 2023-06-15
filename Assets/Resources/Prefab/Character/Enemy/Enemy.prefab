@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 45eea887b298d41f5970f33281d5ccba, type: 2}
+  particlePrefab: {fileID: 5824876601532753663, guid: 2eceda57ee07a4a3e84730f08aceb8a8, type: 3}
 --- !u!61 &5509365141163506184
 BoxCollider2D:
   m_ObjectHideFlags: 0

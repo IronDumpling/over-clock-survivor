@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour, IDanInteractable
     private float m_moveSpeed;
     private string m_target;
 
+    [SerializeField] private GameObject particlePrefab;
+
     const int BULLET_LAYER = 6;
 
     private void Awake()
@@ -29,8 +31,28 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     private void Death()
     {
+        SpawnEnergyParticle();
         EnemyManager.Instance.enemies.Remove(gameObject);
         Destroy(gameObject);
+    }
+
+    private void SpawnEnergyParticle()
+    {
+        for (int i = 0; i < enemyData.energy.quantity; i++)
+        {
+            GameObject particle = Instantiate(particlePrefab, RandomPosition(), Quaternion.identity);
+            EnergyParticle energy = particle?.GetComponent<EnergyParticle>();
+            energy.energyAmount = enemyData.energy.amount;
+            energy.color = enemyData.energy.color;
+            energy.sprite = enemyData.energy.sprite;
+        }
+    }
+
+    Vector3 RandomPosition()
+    {
+        float x = Random.Range(-2f, 2f);
+        float y = Random.Range(-2f, 2f);
+        return new Vector3(x + transform.position.x, y + transform.position.y, 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
