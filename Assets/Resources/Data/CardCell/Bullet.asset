@@ -15,16 +15,13 @@ MonoBehaviour:
   cardTitle: 
   cardDescription:
     baseAmount: 
-    upgradedAmount: 
   cardCost:
     baseAmount: 0
-    upgradedAmount: 0
   cardEffect:
     baseAmount: 0
-    upgradedAmount: 0
   buffAmount:
     baseAmount: 0
-    upgradedAmount: 0
   cardIcon: {fileID: 0}
+  cardShape: 0
   cardType: 0
-  cardTargetType: 0
+  cardTargetType: 1
