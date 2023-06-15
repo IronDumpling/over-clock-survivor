@@ -8,13 +8,14 @@ public class Enemy : MonoBehaviour, IDanInteractable
     private float m_fullHealth;
     private float m_dmg;
     private float m_moveSpeed;
+    private string m_target;
 
     const int BULLET_LAYER = 6;
 
     private void Awake()
     {
         Birth();
-        gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find("BattleStage/Player/PlayerSprite").transform;
+        gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find(m_target).transform;
     }
 
     private void Birth()
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour, IDanInteractable
         m_fullHealth = enemyData.fullHealth;
         m_dmg = enemyData.dmg;
         m_moveSpeed = enemyData.moveSpeed;
+        m_target = enemyData.target;
     }
 
     private void Death()

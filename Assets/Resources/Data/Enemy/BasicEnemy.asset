@@ -16,3 +16,4 @@ MonoBehaviour:
   fullHealth: 10
   moveSpeed: 2.5
   dmg: 5
+  target: Player/PlayerSprite

@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Common;
 
-public class GridManager : MonoSingleton<GridManager>
+public class GridManager : MonoBehaviour
 {
 	[SerializeField] private int _width, _height;
 	[SerializeField] private Grid _tilePrefab;
 	private Vector3 _midPoint;
     private Dictionary<Vector2, Grid> _tiles;
+	public bool isMotherBoard = true;
 
     private void Awake()
     {
         _midPoint = new Vector3(gameObject.transform.position.x + (float)_width / 2 - 0.5f,
 								gameObject.transform.position.y + (float)_height / 2 - 0.5f);
+		GenerateGrid();
+	}
+
+    private void Start()
+    {
+        if (isMotherBoard) SetCameraFollow();
     }
 
     public void GenerateGrid()
@@ -34,8 +40,6 @@ public class GridManager : MonoSingleton<GridManager>
 				_tiles[new Vector2(col, row)] = spwanedTile;
             }
 		}
-
-		CameraManager.Instance.boardFollowPoint.position = _midPoint;
 	}
 
 	public Grid GetTileAtPosition(Vector2 pos)
@@ -43,5 +47,10 @@ public class GridManager : MonoSingleton<GridManager>
 		if (_tiles.TryGetValue(pos, out var tile)) return tile;
 		return null;
 	}
+
+	private void SetCameraFollow()
+	{
+        CameraManager.Instance.boardFollowPoint.position = _midPoint;
+    }
 }
 

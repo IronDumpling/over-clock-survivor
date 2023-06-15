@@ -6,8 +6,9 @@ public class EnemyManager : MonoSingleton<EnemyManager>
 {
     public float spawnInterval = 5f;
     private Timer spawnTimer;
+    private Transform _player;
 
-    [SerializeField] private Transform Player;
+    [SerializeField] private string _target = "Player/PlayerSprite";
     [SerializeField] private GameObject enemyPrefab;
 
     public List<GameObject> enemies;
@@ -17,7 +18,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     {
         spawnTimer = new Timer(spawnInterval, SpawnEnemy);
         spawnTimer.Start();
-        Player = GameObject.Find("BattleStage/Player/PlayerSprite").transform;
+        _player = GameObject.Find(_target).transform;
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     {
         float x = Random.Range(-15f, 15f);
         float y = Random.Range(-15f, 15f);
-        return new Vector3(x + Player.position.x, y + Player.position.y, 0f);
+        return new Vector3(x + _player.position.x, y + _player.position.y, 0f);
     }
 
     void SpawnEnemy()

@@ -25,7 +25,7 @@ public class GameManager : NoDestroyMonoSingleton<GameManager>
 
     public void StartLevel()
     {
-        GridManager.Instance.GenerateGrid();
+        
     }
 
     public void RestartGame()

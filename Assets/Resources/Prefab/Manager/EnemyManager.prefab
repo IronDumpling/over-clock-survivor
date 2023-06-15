@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520733e9f7df346df9629e461db140cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 5
-  Player: {fileID: 0}
+  spawnInterval: 3
+  _target: Player/PlayerSprite
   enemyPrefab: {fileID: 5509365141163506294, guid: e5f6fee8a779d4ab7a6c04c21a928d4f, type: 3}
   enemies: []

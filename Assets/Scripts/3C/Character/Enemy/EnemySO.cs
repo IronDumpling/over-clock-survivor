@@ -6,4 +6,5 @@ using UnityEngine;
 public class EnemySO : CharacterSO
 {
     public float dmg;
+    public string target;
 }
