@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player", menuName = "Character/Player")]
 public class PlayerSO : CharacterSO
 {
-    public float[] fullHealthList;
+    public List<float> fullHealthList;
     public Voltage voltage;
     public Frequency frequency;
 }
@@ -25,7 +25,7 @@ public struct Voltage
     /// <summary>
     /// A list of energy limit of each level
     /// </summary>
-    public float[] energyLimits;
+    public List<float> energyLimits;
 }
 
 [System.Serializable]
@@ -39,6 +39,6 @@ public struct Frequency
     /// A list of the upper and lower frequency bounds,
     /// of the current voltage level
     /// </summary>
-    public float[] lowerBounds;
-    public float[] upperBounds;
+    public List<float> lowerBounds;
+    public List<float> upperBounds;
 }

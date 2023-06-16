@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.ParticleSystem;
+using UnityEngine.Events;
 
 public class Player : MonoSingleton<Player>, IDanInteractable
 {
@@ -21,12 +21,22 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     const int ENEMY_LAYER = 8;
     const int ENERGY_PARTICLE_LAYER = 9;
 
+    public NumChangeEvent onEnergyChange;
+    public NumChangeEvent onLevelChange;
+    public NumChangeEvent onHealthChange;
+    public NumChangeEvent onFreqChange;
+
     protected override void Init()
     {
         base.Init();
 
         rb = GetComponent<Rigidbody2D>();
         danmakuMng = transform.parent.Find("PlayerDanmaku").GetComponent<DanmakuManager>();
+
+        onEnergyChange.AddListener(OnEnergyChange);
+        onHealthChange.AddListener(OnHealthChange);
+        onFreqChange.AddListener(OnFreqChange);
+        onLevelChange.AddListener(OnLevelChange);
 
         Birth();
     }
@@ -50,15 +60,27 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     private void GainEnergy(float energy)
     {
-        m_energy = Mathf.Min(m_energy + energy,
-                             playerData.voltage.energyLimits[m_level]);
+        float maxEnergy;
+        if(playerData.voltage.energyLimits.TryGetElement(m_level, out maxEnergy))
+        {
+            m_energy = Mathf.Min(m_energy + energy, maxEnergy);
+            playerData.voltage.energy = m_energy;
+            onEnergyChange.Invoke(m_energy);
+        }
+    }
+
+    private void LoseEnergy(float energy)
+    {
+        m_energy = Mathf.Max(m_energy - energy, 0f);
         playerData.voltage.energy = m_energy;
+        onEnergyChange.Invoke(m_energy);
     }
 
     private void CleanEnergy()
     {
         m_energy = 0f;
         playerData.voltage.energy = m_energy;
+        onEnergyChange.Invoke(m_energy);
     }
 
     private void LevelUpTo(int level)
@@ -68,6 +90,22 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         OverClock();
         CleanEnergy();
         FullHealthUp();
+        onLevelChange.Invoke(m_level);
+    }
+
+    private void OnEnergyChange(float currEnergy)
+    {
+        float maxEnergy;
+        if (playerData.voltage.energyLimits.TryGetElement(m_level, out maxEnergy))
+        {
+            if (currEnergy >= maxEnergy)
+                LevelUpTo(m_level + 1);
+        }
+    }
+
+    private void OnLevelChange(float currLevel)
+    {
+
     }
 
     #endregion
@@ -76,21 +114,40 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     private void FreqDown(float freq)
     {
-        m_freq = Mathf.Max(m_freq - freq * Time.deltaTime,
-                           playerData.frequency.lowerBounds[m_level]);
-        playerData.frequency.currFreq = m_freq;
+        float minFreq;
+        if (playerData.frequency.lowerBounds.TryGetElement(m_level, out minFreq))
+        {
+            m_freq = Mathf.Max(m_freq - freq * Time.deltaTime, minFreq);
+            playerData.frequency.currFreq = m_freq;
+            onFreqChange.Invoke(m_freq);
+        }
     }
 
     private void FreqUp(float freq)
     {
-        m_freq = Mathf.Min(m_freq + freq,
-                           playerData.frequency.upperBounds[m_level]);
-        playerData.frequency.currFreq = m_freq;
+        float maxFreq;
+        if (playerData.frequency.upperBounds.TryGetElement(m_level, out maxFreq))
+        {
+            m_freq = Mathf.Min(m_freq + freq, maxFreq);
+            playerData.frequency.currFreq = m_freq;
+            onFreqChange.Invoke(m_freq);
+        }
     }
 
     private void OverClock()
     {
-        m_freq = playerData.frequency.upperBounds[m_level];
+        float maxFreq;
+        if (playerData.frequency.upperBounds.TryGetElement(m_level, out maxFreq))
+        {
+            m_freq = maxFreq;
+            playerData.frequency.currFreq = m_freq;
+            onFreqChange.Invoke(m_freq);
+        }
+    }
+
+    private void OnFreqChange(float currFreq)
+    {
+        
     }
 
     #endregion
@@ -101,22 +158,35 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     {
         m_currHealth = Mathf.Min(m_currHealth + recover, m_fullHealth);
         playerData.currHealth = m_currHealth;
+        onHealthChange.Invoke(m_currHealth);
     }
 
     private void CurrHealthDown(float dmg)
     {
         m_currHealth = Mathf.Max(m_currHealth - dmg, 0f);
         playerData.currHealth = m_currHealth;
+        onHealthChange.Invoke(m_currHealth);
     }
 
     private void FullHealthUp()
     {
-        m_fullHealth = playerData.fullHealthList[m_level];
+        if(playerData.fullHealthList.TryGetElement(m_level, out m_fullHealth))
+        {
+            m_currHealth = m_fullHealth;
+            playerData.currHealth = m_currHealth;
+            onHealthChange.Invoke(m_currHealth);
+        }
+
     }
 
     private void Death()
     {
         GameManager.Instance.RestartLevel();
+    }
+
+    private void OnHealthChange(float currHealth)
+    {
+        if (currHealth <= 0) Death();
     }
 
     #endregion
@@ -135,7 +205,6 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         if (collision.gameObject.layer == ENEMY_LAYER)
         {
             CurrHealthDown(collision.gameObject.GetComponent<Enemy>().enemyData.dmg);
-            if (m_currHealth <= 0) Death();
         }
         else if (collision.gameObject.layer == ENERGY_PARTICLE_LAYER)
         {
@@ -145,3 +214,6 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         }
     }
 }
+
+[System.Serializable]
+public class NumChangeEvent : UnityEvent<float> { }

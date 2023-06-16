@@ -13,22 +13,53 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  currHealth: 50
-  fullHealth: 50
+  currHealth: 15
   fullHealthList:
   - 50
   - 75
+  - 100
+  - 125
+  - 150
+  - 175
+  - 200
+  - 225
+  - 250
+  - 275
   voltage:
     level: 0
     energy: 0
     energyLimits:
     - 50
     - 100
+    - 150
+    - 200
+    - 250
+    - 300
+    - 350
+    - 400
+    - 450
+    - 500
   frequency:
     currFreq: 0
     lowerBounds:
     - 5
     - 10
+    - 15
+    - 20
+    - 25
+    - 30
+    - 35
+    - 40
+    - 45
+    - 50
     upperBounds:
     - 10
     - 15
+    - 20
+    - 25
+    - 30
+    - 35
+    - 40
+    - 45
+    - 50
+    - 55
