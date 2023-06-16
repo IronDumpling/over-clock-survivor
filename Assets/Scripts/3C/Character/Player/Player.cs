@@ -7,13 +7,73 @@ using UnityEngine.Events;
 
 public class Player : MonoSingleton<Player>, IDanInteractable
 {
-    public PlayerSO playerData;
-    private int m_level;
-    private float m_energy;
-    private float m_freq;
-    private float m_moveSpeed;
-    private float m_currHealth;
-    private float m_fullHealth;
+    private PlayerSO playerData;
+
+    private int _level;
+    public int m_level
+    {
+        get => _level;
+        private set
+        {
+            _level = value;
+            playerData.voltage.level = _level;
+            onLevelChange.Invoke(_level);
+        }
+    }
+
+    private float _energy;
+    public float m_energy
+    {
+        get => _energy;
+        private set
+        {
+            _energy = value;
+            playerData.voltage.energy = _energy;
+            onEnergyChange.Invoke(m_energy);
+        }
+    }
+
+    private float _freq;
+    public float m_freq
+    {
+        get => _freq;
+        private set
+        {
+            _freq = value;
+            playerData.frequency.currFreq = m_freq;
+            onFreqChange.Invoke(m_freq);
+        }
+    }
+
+    private float _moveSpeed;
+    public float m_moveSpeed
+    {
+        get => _moveSpeed;
+        private set
+        {
+            _moveSpeed = value;
+            playerData.moveSpeed = _moveSpeed;
+        }
+    }
+
+    private float _currHealth;
+    public float m_currHealth
+    {
+        get => _currHealth;
+        private set
+        {
+            _currHealth = value;
+            playerData.currHealth = _currHealth;
+            onHealthChange.Invoke(m_currHealth);
+        }
+    }
+
+    private float _fullHealth;
+    public float m_fullHealth
+    {
+        get => _fullHealth;
+        private set => _fullHealth = value;
+    }
 
     private DanmakuManager danmakuMng;
     private Rigidbody2D rb;
@@ -21,10 +81,10 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     const int ENEMY_LAYER = 8;
     const int ENERGY_PARTICLE_LAYER = 9;
 
-    public NumChangeEvent onEnergyChange;
-    public NumChangeEvent onLevelChange;
-    public NumChangeEvent onHealthChange;
-    public NumChangeEvent onFreqChange;
+    public IntChangeEvent onLevelChange;
+    public FloatChangeEvent onEnergyChange;
+    public FloatChangeEvent onHealthChange;
+    public FloatChangeEvent onFreqChange;
 
     protected override void Init()
     {
@@ -58,41 +118,36 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     #region Voltage
 
-    private void GainEnergy(float energy)
+    public void GainEnergy(float energy)
     {
+        if (energy < 0) return;
         float maxEnergy;
         if(playerData.voltage.energyLimits.TryGetElement(m_level, out maxEnergy))
         {
             m_energy = Mathf.Min(m_energy + energy, maxEnergy);
-            playerData.voltage.energy = m_energy;
-            onEnergyChange.Invoke(m_energy);
             // TODO: Add Frequency Up Here
             // FreqUp();
         }
     }
 
-    private void LoseEnergy(float energy)
+    public void LoseEnergy(float energy)
     {
+        if (energy < 0) return;
         m_energy = Mathf.Max(m_energy - energy, 0f);
-        playerData.voltage.energy = m_energy;
-        onEnergyChange.Invoke(m_energy);
     }
 
-    private void CleanEnergy()
+    public void CleanEnergy()
     {
         m_energy = 0f;
-        playerData.voltage.energy = m_energy;
-        onEnergyChange.Invoke(m_energy);
     }
 
-    private void LevelUpTo(int level)
+    public void LevelUpTo(int level)
     {
+        if (level < 0 || level > playerData.voltage.energyLimits.Count) return;
         m_level = level;
-        playerData.voltage.level = m_level;
         OverClock();
         CleanEnergy();
         FullHealthUp();
-        onLevelChange.Invoke(m_level);
     }
 
     private void OnEnergyChange(float currEnergy)
@@ -105,7 +160,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         }
     }
 
-    private void OnLevelChange(float currLevel)
+    private void OnLevelChange(int currLevel)
     {
 
     }
@@ -116,23 +171,21 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     private void FreqDown(float freq)
     {
+        if (freq < 0) return;
         float minFreq;
         if (playerData.frequency.lowerBounds.TryGetElement(m_level, out minFreq))
         {
             m_freq = Mathf.Max(m_freq - freq * Time.deltaTime, minFreq);
-            playerData.frequency.currFreq = m_freq;
-            onFreqChange.Invoke(m_freq);
         }
     }
 
     private void FreqUp(float freq)
     {
+        if (freq < 0) return;
         float maxFreq;
         if (playerData.frequency.upperBounds.TryGetElement(m_level, out maxFreq))
         {
             m_freq = Mathf.Min(m_freq + freq, maxFreq);
-            playerData.frequency.currFreq = m_freq;
-            onFreqChange.Invoke(m_freq);
         }
     }
 
@@ -142,8 +195,6 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         if (playerData.frequency.upperBounds.TryGetElement(m_level, out maxFreq))
         {
             m_freq = maxFreq;
-            playerData.frequency.currFreq = m_freq;
-            onFreqChange.Invoke(m_freq);
         }
     }
 
@@ -158,25 +209,23 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     private void CurrHealthUp(float recover)
     {
-        m_currHealth = Mathf.Min(m_currHealth + recover, m_fullHealth);
-        playerData.currHealth = m_currHealth;
-        onHealthChange.Invoke(m_currHealth);
+        if (recover < 0) return;
+        m_currHealth = Mathf.Min(m_currHealth + recover, m_fullHealth);       
     }
 
     private void CurrHealthDown(float dmg)
     {
+        if (dmg < 0) return;
         m_currHealth = Mathf.Max(m_currHealth - dmg, 0f);
-        playerData.currHealth = m_currHealth;
-        onHealthChange.Invoke(m_currHealth);
     }
 
     private void FullHealthUp()
     {
-        if(playerData.fullHealthList.TryGetElement(m_level, out m_fullHealth))
+        float healthLimit;
+        if(playerData.fullHealthList.TryGetElement(m_level, out healthLimit))
         {
+            m_fullHealth = healthLimit;
             m_currHealth = m_fullHealth;
-            playerData.currHealth = m_currHealth;
-            onHealthChange.Invoke(m_currHealth);
         }
 
     }
@@ -216,6 +265,3 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         }
     }
 }
-
-[System.Serializable]
-public class NumChangeEvent : UnityEvent<float> { }
