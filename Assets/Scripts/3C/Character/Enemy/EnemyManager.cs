@@ -9,6 +9,9 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     
     private Timer spawnTimer;
     private GridGraph nav;
+    private Transform enemyParent;
+    public Transform particleParent;
+
     public float spawnInterval = 5f;
     public List<GameObject> enemies;
 
@@ -18,6 +21,8 @@ public class EnemyManager : MonoSingleton<EnemyManager>
         spawnTimer = new Timer(spawnInterval, SpawnEnemy);
         spawnTimer.Start();
         nav = (GridGraph)GetComponent<AstarPath>().graphs[0];
+        enemyParent = transform.Find("Enemies");
+        particleParent = transform.Find("EnergyParticles");
     }
 
     // Update is called once per frame
@@ -37,7 +42,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     {
         Vector3 randomPosition = RandomPosition();
         GameObject spwanedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
-        spwanedEnemy.transform.SetParent(gameObject.transform);
+        spwanedEnemy.transform.SetParent(enemyParent);
         spwanedEnemy.name = $"Enemy_{enemies.Count}";
         enemies.Add(spwanedEnemy);
     }

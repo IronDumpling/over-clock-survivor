@@ -66,6 +66,8 @@ public class Player : MonoSingleton<Player>, IDanInteractable
             m_energy = Mathf.Min(m_energy + energy, maxEnergy);
             playerData.voltage.energy = m_energy;
             onEnergyChange.Invoke(m_energy);
+            // TODO: Add Frequency Up Here
+            // FreqUp();
         }
     }
 

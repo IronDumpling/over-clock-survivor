@@ -183,7 +183,7 @@ MonoBehaviour:
   isLocal: 0
   isClosedPath: 1
   pathResolution: 10
-  pathMode: 1
+  pathMode: 3
   lockRotation: 0
   assignForwardAndUp: 0
   forwardDirection: {x: 0, y: 0, z: 1}

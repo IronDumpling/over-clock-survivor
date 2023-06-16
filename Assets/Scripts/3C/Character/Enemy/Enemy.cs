@@ -48,10 +48,14 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     private void SpawnEnergyParticle()
     {
+        Transform particleParent = EnemyManager.Instance.particleParent;
         for (int i = 0; i < enemyData.energy.quantity; i++)
         {
             GameObject particle = Instantiate(particlePrefab, RandomPosition(), Quaternion.identity);
             EnergyParticle energy = particle?.GetComponent<EnergyParticle>();
+            particle.transform.SetParent(particleParent);
+            particle.name = $"Energy_Particle_{i}";
+
             energy.m_amount = enemyData.energy.amount;
             energy.m_color = enemyData.energy.color;
             energy.m_sprite = enemyData.energy.sprite;
