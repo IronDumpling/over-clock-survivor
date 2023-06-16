@@ -3,21 +3,75 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour, IDanInteractable
 {
-    public EnemySO enemyData;
-    private float m_currHealth;
-    private float m_fullHealth;
-    private float m_dmg;
-    private float m_moveSpeed;
-    private string m_target;
-
+    [SerializeField] private EnemySO enemyData;
     [SerializeField] private GameObject particlePrefab;
 
+    private float _currHealth;
+    public float m_currHealth
+    {
+        get => _currHealth;
+        private set
+        {
+            _currHealth = Mathf.Min(value, _fullHealth);
+            _currHealth = Mathf.Max(value, 0f);
+            enemyData.currHealth = _currHealth;
+            onHealthChange.Invoke(m_currHealth);
+        }
+    }
+
+    private float _fullHealth;
+    public float m_fullHealth
+    {
+        get => _fullHealth;
+        private set
+        {
+            _fullHealth = value;
+            enemyData.fullHealth = _fullHealth;
+        }
+    }
+
+    private float _dmg;
+    public float m_dmg
+    {
+        get => _dmg;
+        private set
+        {
+            _dmg = value;
+            enemyData.dmg = _dmg;
+        }
+    }
+
+    private float _moveSpeed;
+    public float m_moveSpeed
+    {
+        get => _moveSpeed;
+        private set
+        {
+            _moveSpeed = value;
+            enemyData.moveSpeed = _moveSpeed;
+        }
+    }
+
+    private string _target;
+    public string m_target
+    {
+        get => _target;
+        private set
+        {
+            _target = value;
+            enemyData.target = _target;
+        }
+    }
+
     const int BULLET_LAYER = 6;
+
+    public FloatChangeEvent onHealthChange;
 
     private void Awake()
     {
         Birth();
         gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find(m_target).transform;
+        onHealthChange.AddListener(OnHealthChange);
     }
 
     private void Birth()
@@ -31,12 +85,19 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     private void CurrHealthDown(float dmg)
     {
-        m_currHealth = Mathf.Max(m_currHealth - dmg, 0f);
+        if (dmg < 0) return;
+        m_currHealth -= dmg;
     }
 
     private void CurrHealthUp(float recover)
     {
-        m_currHealth = Mathf.Min(m_currHealth + recover, m_fullHealth);
+        if (recover < 0) return;
+        m_currHealth += recover;
+    }
+
+    private void OnHealthChange(float currHealth)
+    {
+        if (currHealth <= 0) Death();
     }
 
     private void Death()
@@ -76,7 +137,6 @@ public class Enemy : MonoBehaviour, IDanInteractable
         {
             // TODO: Bullet Would Collide Multiple Times
             CurrHealthDown(collision.gameObject.GetComponent<Danmaku>().dmg);
-            if (m_currHealth <= 0) Death();
         }
     }
 }
