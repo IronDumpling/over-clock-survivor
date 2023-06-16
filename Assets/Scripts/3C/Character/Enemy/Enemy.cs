@@ -29,6 +29,16 @@ public class Enemy : MonoBehaviour, IDanInteractable
         m_target = enemyData.target;
     }
 
+    private void CurrHealthDown(float dmg)
+    {
+        m_currHealth = Mathf.Max(m_currHealth - dmg, 0f);
+    }
+
+    private void CurrHealthUp(float recover)
+    {
+        m_currHealth = Mathf.Min(m_currHealth + recover, m_fullHealth);
+    }
+
     private void Death()
     {
         SpawnEnergyParticle();
@@ -42,9 +52,10 @@ public class Enemy : MonoBehaviour, IDanInteractable
         {
             GameObject particle = Instantiate(particlePrefab, RandomPosition(), Quaternion.identity);
             EnergyParticle energy = particle?.GetComponent<EnergyParticle>();
-            energy.energyAmount = enemyData.energy.amount;
-            energy.color = enemyData.energy.color;
-            energy.sprite = enemyData.energy.sprite;
+            energy.m_amount = enemyData.energy.amount;
+            energy.m_color = enemyData.energy.color;
+            energy.m_sprite = enemyData.energy.sprite;
+            energy.Render();
         }
     }
 
@@ -59,7 +70,8 @@ public class Enemy : MonoBehaviour, IDanInteractable
     {
         if (collision.gameObject.layer == BULLET_LAYER)
         {
-            m_currHealth -= collision.gameObject.GetComponent<Danmaku>().dmg;
+            // TODO: Bullet Would Collide Multiple Times
+            CurrHealthDown(collision.gameObject.GetComponent<Danmaku>().dmg);
             if (m_currHealth <= 0) Death();
         }
     }

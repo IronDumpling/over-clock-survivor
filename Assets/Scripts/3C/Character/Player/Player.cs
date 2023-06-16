@@ -61,12 +61,13 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         playerData.voltage.energy = m_energy;
     }
 
-    private void LevelUp(int level)
+    private void LevelUpTo(int level)
     {
-        m_level += level;
+        m_level = level;
         playerData.voltage.level = m_level;
         OverClock();
         CleanEnergy();
+        FullHealthUp();
     }
 
     #endregion
@@ -138,9 +139,8 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         }
         else if (collision.gameObject.layer == ENERGY_PARTICLE_LAYER)
         {
-            Debug.Log("Collide Particles");
             EnergyParticle energy = collision.gameObject?.GetComponent<EnergyParticle>();
-            GainEnergy(energy.energyAmount);
+            GainEnergy(energy.m_amount);
             energy.Death();
         }
     }

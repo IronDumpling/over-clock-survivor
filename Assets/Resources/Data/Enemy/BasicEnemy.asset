@@ -21,5 +21,5 @@ MonoBehaviour:
   energy:
     amount: 25
     quantity: 2
-    energyColor: {r: 0.9056604, g: 0.850273, b: 0.3972944, a: 0}
-    energySprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
+    color: {r: 1, g: 0.58977896, b: 0.0990566, a: 1}
+    sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
