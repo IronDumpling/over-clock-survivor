@@ -43,7 +43,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         m_freq = playerData.frequency.currFreq;
         m_moveSpeed = playerData.moveSpeed;
         m_currHealth = playerData.currHealth;
-        m_fullHealth = playerData.fullHealth;
+        FullHealthUp();
     }
 
     #region Voltage
@@ -51,7 +51,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     private void GainEnergy(float energy)
     {
         m_energy = Mathf.Min(m_energy + energy,
-                             playerData.voltage.energyLimits[m_level - 1]);
+                             playerData.voltage.energyLimits[m_level]);
         playerData.voltage.energy = m_energy;
     }
 
@@ -76,20 +76,20 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     private void FreqDown(float freq)
     {
         m_freq = Mathf.Max(m_freq - freq * Time.deltaTime,
-                           playerData.frequency.lowerBounds[m_level - 1]);
+                           playerData.frequency.lowerBounds[m_level]);
         playerData.frequency.currFreq = m_freq;
     }
 
     private void FreqUp(float freq)
     {
         m_freq = Mathf.Min(m_freq + freq,
-                           playerData.frequency.upperBounds[m_level - 1]);
+                           playerData.frequency.upperBounds[m_level]);
         playerData.frequency.currFreq = m_freq;
     }
 
     private void OverClock()
     {
-        m_freq = playerData.frequency.upperBounds[m_level - 1];
+        m_freq = playerData.frequency.upperBounds[m_level];
     }
 
     #endregion
@@ -110,7 +110,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     private void FullHealthUp()
     {
-        m_fullHealth = playerData.fullHealthList[m_level - 1];
+        m_fullHealth = playerData.fullHealthList[m_level];
     }
 
     private void Death()
@@ -138,6 +138,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         }
         else if (collision.gameObject.layer == ENERGY_PARTICLE_LAYER)
         {
+            Debug.Log("Collide Particles");
             EnergyParticle energy = collision.gameObject?.GetComponent<EnergyParticle>();
             GainEnergy(energy.energyAmount);
             energy.Death();

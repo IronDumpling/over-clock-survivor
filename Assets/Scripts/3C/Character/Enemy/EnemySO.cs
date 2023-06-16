@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Character/Enemy")]
 public class EnemySO : CharacterSO
 {
+    public float fullHealth;
     public string enemyName;
     public string target;
     public float dmg;

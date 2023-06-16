@@ -12,6 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb007d8db6dc4437ab841bcdaf292b1, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  moveSpeed: 5
   currHealth: 50
   fullHealth: 50
-  moveSpeed: 5
+  fullHealthList:
+  - 50
+  - 75
+  voltage:
+    level: 0
+    energy: 0
+    energyLimits:
+    - 50
+    - 100
+  frequency:
+    currFreq: 0
+    lowerBounds:
+    - 5
+    - 10
+    upperBounds:
+    - 10
+    - 15
