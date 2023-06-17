@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   currHealth: 0
-  fullHealth: 10
+  fullHealth: 15
   enemyName: Killer
   target: Player/PlayerSprite
-  dmg: 5
+  dmg: 10
   energy:
     energyAmount: 10
     freqAmount: 0.1
