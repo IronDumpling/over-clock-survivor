@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -65,6 +66,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         private set
         {
             _moveSpeed = Mathf.Max(value, 1f);
+            _moveSpeed = (float)Math.Round(_moveSpeed, 1);
             playerData.moveSpeed = _moveSpeed;
         }
     }
@@ -140,9 +142,9 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         Debug.Log($"max level: {_maxLevel}");
         m_level = playerData.voltage.level;
         m_energy = playerData.voltage.energy;
-        m_moveSpeed = playerData.moveSpeed;
         m_freq = _maxFreq;
         m_currHealth = _fullHealth;
+        CalSpeedFromFreq();
         _naturalFreqDrop = playerData.naturalFreqDrop;
     }
 
@@ -209,9 +211,14 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         m_freq = _maxFreq;
     }
 
+    private void CalSpeedFromFreq()
+    {
+        m_moveSpeed = m_freq / 2f; // TODO: Replace with other formula
+    }
+
     private void OnFreqChange(float currFreq, float minFreq, float maxFreq, float fullFreq)
     {
-        
+        CalSpeedFromFreq();
     }
 
     #endregion
