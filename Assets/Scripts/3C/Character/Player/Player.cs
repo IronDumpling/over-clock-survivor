@@ -33,7 +33,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
             _energy = Mathf.Min(value, _maxEnergy);
             _energy = Mathf.Max(value, 0f);
             playerData.voltage.energy = _energy;
-            onEnergyChange.Invoke(_energy, _maxEnergy);
+            onEnergyChange.Invoke(_energy, _maxEnergy); // TODO: Game broken when hit level 8, energy 425
         }
     }
 

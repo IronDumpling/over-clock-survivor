@@ -19,6 +19,6 @@ public class HealthUI : MonoBehaviour
     private void OnHealthChange(float currHealth, float fullHealth)
     {
         if (fullHealth <= 0 || currHealth < 0) return;
-        _healthBar[0].GetComponent<Image>().fillAmount = currHealth/fullHealth;
+        _healthBar[0].GetComponent<Image>().fillAmount = Mathf.Min(currHealth /fullHealth, 1f);
     }
 }
