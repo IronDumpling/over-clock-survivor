@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  currHealth: 165
+  currHealth: 250
   fullHealthList:
   - 50
   - 75
@@ -40,7 +40,7 @@ MonoBehaviour:
     - 450
     - 500
   frequency:
-    currFreq: 35
+    currFreq: 50
     lowerBounds:
     - 5
     - 10

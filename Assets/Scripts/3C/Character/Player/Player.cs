@@ -33,7 +33,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
             _energy = Mathf.Min(value, _maxEnergy);
             _energy = Mathf.Max(value, 0f);
             playerData.voltage.energy = _energy;
-            onEnergyChange.Invoke(m_energy);
+            onEnergyChange.Invoke(_energy);
         }
     }
 
@@ -48,7 +48,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
             _freq = Mathf.Min(value, _maxFreq);
             _freq = Mathf.Max(value, _minFreq);
             playerData.frequency.currFreq = m_freq;
-            onFreqChange.Invoke(m_freq);
+            onFreqChange.Invoke(_freq);
         }
     }
 
@@ -75,7 +75,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
             _currHealth = Mathf.Min(value, _fullHealth);
             _currHealth = Mathf.Max(value, 0f);
             playerData.currHealth = _currHealth;
-            onHealthChange.Invoke(m_currHealth);
+            onHealthChange.Invoke(_currHealth, _fullHealth);
         }
     }
 
@@ -89,8 +89,8 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     public IntChangeEvent onLevelChange;
     public FloatChangeEvent onEnergyChange;
-    public FloatChangeEvent onHealthChange;
     public FloatChangeEvent onFreqChange;
+    public TwoFloatChangeEvent onHealthChange;
 
     protected override void Init()
     {
@@ -223,7 +223,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         GameManager.Instance.RestartLevel();
     }
 
-    private void OnHealthChange(float currHealth)
+    private void OnHealthChange(float currHealth, float fullHealth)
     {
         if (currHealth <= 0) Death();
     }

@@ -10,6 +10,12 @@ public class FloatChangeEvent : UnityEvent<float>
 }
 
 [System.Serializable]
+public class TwoFloatChangeEvent : UnityEvent<float, float>
+{
+
+}
+
+[System.Serializable]
 public class IntChangeEvent : UnityEvent<int>
 {
 
