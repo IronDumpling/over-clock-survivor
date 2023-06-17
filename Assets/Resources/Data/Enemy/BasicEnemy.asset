@@ -19,7 +19,8 @@ MonoBehaviour:
   target: Player/PlayerSprite
   dmg: 5
   energy:
-    amount: 5
+    energyAmount: 10
+    freqAmount: 0.1
     quantity: 2
     color: {r: 1, g: 0.58977896, b: 0.0990566, a: 1}
     sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}

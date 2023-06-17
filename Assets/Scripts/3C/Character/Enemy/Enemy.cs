@@ -117,7 +117,8 @@ public class Enemy : MonoBehaviour, IDanInteractable
             particle.transform.SetParent(particleParent);
             particle.name = $"Energy_Particle_{i}";
 
-            energy.m_amount = enemyData.energy.amount;
+            energy.m_energy = enemyData.energy.energyAmount;
+            energy.m_freq = enemyData.energy.freqAmount;
             energy.m_color = enemyData.energy.color;
             energy.m_sprite = enemyData.energy.sprite;
             energy.Render();

@@ -17,6 +17,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         {
             _level = Mathf.Min(value, _maxLevel);
             _level = Mathf.Max(value, 0);
+            Debug.Log($"bounded level: {_level}");
             playerData.voltage.level = _level;
             onLevelChange.Invoke(_level);
         }
@@ -30,12 +31,10 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         get => _energy;
         private set
         {
-            Debug.Log("set current energy");
             _energy = Mathf.Min(value, _maxEnergy);
             _energy = Mathf.Max(value, 0f);
             playerData.voltage.energy = _energy;
             onEnergyChange.Invoke(_energy, _maxEnergy);
-            Debug.Log($"current energy: {_energy}");
         }
     }
 
@@ -57,6 +56,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     private float _minFreq;
     private float _maxFreq; // max freq means the upper bound of current level's freq
     private float _fullFreq; // full freq means the largest frequency in the game
+    private float _naturalFreqDrop;
 
     private float _moveSpeed;
     public float m_moveSpeed
@@ -116,6 +116,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     private void Update()
     {
         danmakuMng.UseCommand(transform.position);
+        FreqDown(_naturalFreqDrop);
     }
 
     void UpdateBounds()
@@ -124,6 +125,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         playerData.frequency.upperBounds.TryGetElement(m_level, out _maxFreq);
         playerData.voltage.energyLimits.TryGetElement(m_level, out _maxEnergy);
         playerData.fullHealthList.TryGetElement(m_level, out _fullHealth);
+        Debug.Log("Update Bounds!");
     }
 
     void GetFixedBound()
@@ -135,15 +137,13 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     private void Birth()
     {
         GetFixedBound();
+        Debug.Log($"max level: {_maxLevel}");
         m_level = playerData.voltage.level;
-
-        UpdateBounds();
         m_energy = playerData.voltage.energy;
         m_moveSpeed = playerData.moveSpeed;
         m_freq = _maxFreq;
         m_currHealth = _fullHealth;
-        Debug.Log($" max level: {_maxLevel}, level:{m_level}；" +
-                  $"energy limit: {_maxEnergy}");
+        _naturalFreqDrop = playerData.naturalFreqDrop;
     }
 
     #region Voltage
@@ -152,8 +152,6 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     {
         if (energy < 0) return;
         m_energy += energy;
-        // TODO: Add Frequency Up Here
-        // FreqUp();
     }
 
     public void LoseEnergy(float energy)
@@ -167,23 +165,27 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         m_energy = 0f;
     }
 
-    public void LevelUpTo(int level)
-    {
-        m_level = level;
-        UpdateBounds();
-        OverClock();
-        CleanEnergy();
-        CurrHealthFull();
-    }
-
     private void OnEnergyChange(float currEnergy, float maxEnergy)
     {
-        if (currEnergy >= maxEnergy) LevelUpTo(m_level + 1);
+        if (currEnergy >= maxEnergy)
+        {
+            Debug.Log("Level Up!");
+            LevelUpTo(m_level + 1);
+        }
+    }
+
+    public void LevelUpTo(int level)
+    {
+        Debug.Log($"Try to level Up to {level}");
+        m_level = level;
     }
 
     private void OnLevelChange(int currLevel)
     {
-
+        UpdateBounds();
+        OverClock();
+        CleanEnergy();
+        CurrHealthFull();
     }
 
     #endregion
@@ -263,7 +265,8 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         else if (collision.gameObject.layer == ENERGY_PARTICLE_LAYER)
         {
             EnergyParticle energy = collision.gameObject?.GetComponent<EnergyParticle>();
-            GainEnergy(energy.m_amount);
+            GainEnergy(energy.m_energy);
+            FreqUp(energy.m_freq);
             energy.Death();
         }
     }

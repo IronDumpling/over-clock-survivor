@@ -17,7 +17,11 @@ public class EnemySO : CharacterSO
         /// <summary>
         /// The amount of energy of each energy particle
         /// </summary>
-        public float amount;
+        public float energyAmount;
+        /// <summary>
+        /// The amount of frequency rise when player obtain the particle 
+        /// </summary>
+        public float freqAmount;
         /// <summary>
         /// The quantity of particle that would be spawned
         /// </summary>

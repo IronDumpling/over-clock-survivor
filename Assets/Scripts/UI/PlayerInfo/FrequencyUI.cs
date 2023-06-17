@@ -24,6 +24,6 @@ public class FrequencyUI : MonoBehaviour
         _freqBar[0].GetComponent<Image>().fillAmount = Mathf.Min(minFreq / fullFreq, 1f);
         _freqBar[1].GetComponent<Image>().fillAmount = Mathf.Min(maxFreq / fullFreq, 1f);
         _freqBar[2].GetComponent<Image>().fillAmount = Mathf.Min(freq / fullFreq, 1f);
-        _freqTxt.GetComponent<TMPro.TMP_Text>().text = $"{freq} Frequency";
+        _freqTxt.GetComponent<TMPro.TMP_Text>().text = freq.ToString("F1") + " Frequency";
     }
 }

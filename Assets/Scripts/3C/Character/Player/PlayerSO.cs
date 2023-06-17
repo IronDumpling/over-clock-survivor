@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player", menuName = "Character/Player")]
 public class PlayerSO : CharacterSO
 {
+    public float naturalFreqDrop;
     public List<float> fullHealthList;
     public Voltage voltage;
     public Frequency frequency;

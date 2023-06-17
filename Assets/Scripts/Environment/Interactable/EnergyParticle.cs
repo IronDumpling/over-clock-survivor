@@ -5,10 +5,17 @@ using UnityEngine;
 public class EnergyParticle : MonoBehaviour
 {
     private float _energyAmount;
-    public float m_amount
+    public float m_energy
     {
         get => _energyAmount;
         set => _energyAmount = value;
+    }
+
+    private float _freqAmount;
+    public float m_freq
+    {
+        get => _freqAmount;
+        set => _freqAmount = value;
     }
 
     public Sprite m_sprite;
