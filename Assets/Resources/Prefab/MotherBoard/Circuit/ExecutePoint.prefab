@@ -190,11 +190,11 @@ MonoBehaviour:
   upDirection: {x: 0, y: 1, z: 0}
   tweenRigidbody: 0
   wps:
-  - {x: 47, y: 3, z: 0}
-  - {x: 54, y: 3, z: 0}
-  - {x: 54, y: -4, z: 0}
-  - {x: 46, y: -4, z: 0}
-  - {x: 46, y: 3, z: 0}
+  - {x: -110, y: 3, z: 0}
+  - {x: -103, y: 3, z: 0}
+  - {x: -103, y: -4, z: 0}
+  - {x: -111, y: -4, z: 0}
+  - {x: -111, y: 3, z: 0}
   fullWps: []
   path:
     wpLengths:
@@ -206,13 +206,13 @@ MonoBehaviour:
     - 7
     - 1
     wps:
-    - {x: 47, y: 3, z: 0}
-    - {x: 47, y: 3, z: 0}
-    - {x: 54, y: 3, z: 0}
-    - {x: 54, y: -4, z: 0}
-    - {x: 46, y: -4, z: 0}
-    - {x: 46, y: 3, z: 0}
-    - {x: 47, y: 3, z: 0}
+    - {x: -110, y: 3, z: 0}
+    - {x: -110, y: 3, z: 0}
+    - {x: -103, y: 3, z: 0}
+    - {x: -103, y: -4, z: 0}
+    - {x: -111, y: -4, z: 0}
+    - {x: -111, y: 3, z: 0}
+    - {x: -110, y: 3, z: 0}
     type: 0
     subdivisionsXSegment: 10
     subdivisions: 70
@@ -237,7 +237,7 @@ MonoBehaviour:
   showIndexes: 1
   showWpLength: 0
   pathColor: {r: 1, g: 1, b: 1, a: 0.5}
-  lastSrcPosition: {x: 47, y: 3, z: 0}
+  lastSrcPosition: {x: -110, y: 3, z: 0}
   lastSrcRotation: {x: -0, y: -0, z: -0, w: 1}
   wpsDropdown: 1
   dropToFloorOffset: 0

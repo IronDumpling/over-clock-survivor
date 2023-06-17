@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb007d8db6dc4437ab841bcdaf292b1, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  currHealth: 250
+  moveSpeed: 10
+  currHealth: 200
   fullHealthList:
   - 50
   - 75
@@ -40,7 +40,7 @@ MonoBehaviour:
     - 450
     - 500
   frequency:
-    currFreq: 50
+    currFreq: 40
     lowerBounds:
     - 5
     - 10

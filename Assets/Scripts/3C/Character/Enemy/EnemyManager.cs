@@ -20,7 +20,10 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     {
         spawnTimer = new Timer(spawnInterval, SpawnEnemy);
         spawnTimer.Start();
+
         nav = (GridGraph)GetComponent<AstarPath>().graphs[0];
+        transform.position = new Vector3(nav.center.x, nav.center.y, 0f);
+
         enemyParent = transform.Find("Enemies");
         particleParent = transform.Find("EnergyParticles");
     }

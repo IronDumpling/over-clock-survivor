@@ -126,8 +126,8 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     Vector3 RandomPosition()
     {
-        float x = Random.Range(-2f, 2f);
-        float y = Random.Range(-2f, 2f);
+        float x = Random.Range(-transform.localScale.x / 2f, transform.localScale.x / 2f);
+        float y = Random.Range(-transform.localScale.x / 2f, transform.localScale.x / 2f);
         return new Vector3(x + transform.position.x, y + transform.position.y, 0f);
     }
 

@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6bfa90f0e7d46a6ba096ad58a59304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  m_sprite: {fileID: 0}
+  m_color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &7252925591477019303
 BoxCollider2D:
   m_ObjectHideFlags: 0
