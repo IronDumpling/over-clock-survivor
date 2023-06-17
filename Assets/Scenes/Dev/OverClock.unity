@@ -1699,6 +1699,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 648495190}
     m_Modifications:
+    - target: {fileID: 1974894908666845741, guid: 90ca1773c00334102ad0df5d61dbdc92, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974894908666845741, guid: 90ca1773c00334102ad0df5d61dbdc92, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974894908796401732, guid: 90ca1773c00334102ad0df5d61dbdc92, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974894908796401732, guid: 90ca1773c00334102ad0df5d61dbdc92, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 1974894909217077789, guid: 90ca1773c00334102ad0df5d61dbdc92, type: 3}
       propertyPath: m_Name
       value: VoltageUI

@@ -20,6 +20,9 @@ public class VoltageUI : MonoBehaviour
 
     private void OnEnergyChange(float energy, float maxEnergy)
     {
+        if (maxEnergy <= 0 || energy < 0) return;
         _energyBar[0].GetComponent<Image>().fillAmount = energy / maxEnergy;
+        _voltageTxt.GetComponent<TMPro.TMP_Text>().text = $"Voltage: {Player.Instance.m_level}";
+        _energyTxt.GetComponent<TMPro.TMP_Text>().text = $"Energy: {energy}";
     }
 }

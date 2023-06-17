@@ -103,7 +103,10 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         onHealthChange.AddListener(OnHealthChange);
         onFreqChange.AddListener(OnFreqChange);
         onLevelChange.AddListener(OnLevelChange);
+    }
 
+    private void Start()
+    {
         Birth();
     }
 
@@ -126,8 +129,8 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         UpdateBounds();
         m_level = playerData.voltage.level;
         m_energy = playerData.voltage.energy;
-        m_freq = playerData.frequency.currFreq;
         m_moveSpeed = playerData.moveSpeed;
+        m_freq = _maxFreq;
         m_currHealth = _fullHealth;
     }
 
