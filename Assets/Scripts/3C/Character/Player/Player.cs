@@ -33,7 +33,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
             _energy = Mathf.Min(value, _maxEnergy);
             _energy = Mathf.Max(value, 0f);
             playerData.voltage.energy = _energy;
-            onEnergyChange.Invoke(_energy);
+            onEnergyChange.Invoke(_energy, _maxEnergy);
         }
     }
 
@@ -88,7 +88,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     const int ENERGY_PARTICLE_LAYER = 9;
 
     public IntChangeEvent onLevelChange;
-    public FloatChangeEvent onEnergyChange;
+    public TwoFloatChangeEvent onEnergyChange;
     public FloatChangeEvent onFreqChange;
     public TwoFloatChangeEvent onHealthChange;
 
@@ -161,9 +161,9 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         CurrHealthFull();
     }
 
-    private void OnEnergyChange(float currEnergy)
+    private void OnEnergyChange(float currEnergy, float maxEnergy)
     {
-        if (currEnergy >= _maxEnergy) LevelUpTo(m_level + 1);
+        if (currEnergy >= maxEnergy) LevelUpTo(m_level + 1);
     }
 
     private void OnLevelChange(int currLevel)
