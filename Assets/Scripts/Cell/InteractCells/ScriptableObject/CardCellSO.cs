@@ -6,7 +6,6 @@ public class CardCellSO : ScriptableObject
 {
     public string cardTitle;
     public CardDescription cardDescription;
-    public CardAmount cardCost;
 
     public CardAmount cardEffect;
     public CardAmount buffAmount;
@@ -40,22 +39,18 @@ public class CardCellSO : ScriptableObject
         self, enemy
     };
 
-    public int GetCardCostAmount()
-    {
-        return cardCost.baseAmount; 
-    }
-    public int GetCardEffectAmount()
-    {
-         return cardEffect.baseAmount;
-    }
-    public string GetCardDescriptionAmount()
-    {
-        return cardDescription.baseAmount;
-    }
-    public int GetBuffAmount()
-    {
-         return buffAmount.baseAmount;
-    }
+    //public int GetCardEffectAmount()
+    //{
+    //     return cardEffect.baseAmount;
+    //}
+    //public string GetCardDescriptionAmount()
+    //{
+    //    return cardDescription.baseAmount;
+    //}
+    //public int GetBuffAmount()
+    //{
+    //     return buffAmount.baseAmount;
+    //}
 }
 
 [System.Serializable]

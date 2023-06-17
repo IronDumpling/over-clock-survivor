@@ -30,10 +30,12 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         get => _energy;
         private set
         {
+            Debug.Log("set current energy");
             _energy = Mathf.Min(value, _maxEnergy);
             _energy = Mathf.Max(value, 0f);
             playerData.voltage.energy = _energy;
-            onEnergyChange.Invoke(_energy, _maxEnergy); // TODO: Game broken when hit level 8, energy 425
+            onEnergyChange.Invoke(_energy, _maxEnergy);
+            Debug.Log($"current energy: {_energy}");
         }
     }
 
@@ -48,12 +50,13 @@ public class Player : MonoSingleton<Player>, IDanInteractable
             _freq = Mathf.Min(value, _maxFreq);
             _freq = Mathf.Max(value, _minFreq);
             playerData.frequency.currFreq = m_freq;
-            onFreqChange.Invoke(_freq);
+            onFreqChange.Invoke(_freq, _minFreq, _maxFreq, _fullFreq);
         }
     }
 
     private float _minFreq;
-    private float _maxFreq;
+    private float _maxFreq; // max freq means the upper bound of current level's freq
+    private float _fullFreq; // full freq means the largest frequency in the game
 
     private float _moveSpeed;
     public float m_moveSpeed
@@ -89,8 +92,8 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     public IntChangeEvent onLevelChange;
     public TwoFloatChangeEvent onEnergyChange;
-    public FloatChangeEvent onFreqChange;
     public TwoFloatChangeEvent onHealthChange;
+    public FourFloatChangeEvent onFreqChange;
 
     protected override void Init()
     {
@@ -121,17 +124,26 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         playerData.frequency.upperBounds.TryGetElement(m_level, out _maxFreq);
         playerData.voltage.energyLimits.TryGetElement(m_level, out _maxEnergy);
         playerData.fullHealthList.TryGetElement(m_level, out _fullHealth);
+    }
+
+    void GetFixedBound()
+    {
         _maxLevel = playerData.voltage.energyLimits.Count;
+        playerData.frequency.upperBounds.TryGetElement(_maxLevel - 1, out _fullFreq);
     }
 
     private void Birth()
     {
-        UpdateBounds();
+        GetFixedBound();
         m_level = playerData.voltage.level;
+
+        UpdateBounds();
         m_energy = playerData.voltage.energy;
         m_moveSpeed = playerData.moveSpeed;
         m_freq = _maxFreq;
         m_currHealth = _fullHealth;
+        Debug.Log($" max level: {_maxLevel}, level:{m_level}；" +
+                  $"energy limit: {_maxEnergy}");
     }
 
     #region Voltage
@@ -195,7 +207,7 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         m_freq = _maxFreq;
     }
 
-    private void OnFreqChange(float currFreq)
+    private void OnFreqChange(float currFreq, float minFreq, float maxFreq, float fullFreq)
     {
         
     }

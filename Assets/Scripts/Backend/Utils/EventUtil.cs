@@ -16,6 +16,12 @@ public class TwoFloatChangeEvent : UnityEvent<float, float>
 }
 
 [System.Serializable]
+public class FourFloatChangeEvent : UnityEvent<float, float, float, float>
+{
+
+}
+
+[System.Serializable]
 public class IntChangeEvent : UnityEvent<int>
 {
 

@@ -15,8 +15,6 @@ MonoBehaviour:
   cardTitle: 
   cardDescription:
     baseAmount: 
-  cardCost:
-    baseAmount: 0
   cardEffect:
     baseAmount: 0
   buffAmount:
