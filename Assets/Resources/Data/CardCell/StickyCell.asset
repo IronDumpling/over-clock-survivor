@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 190ca528b4b894ba1a823787dde749f5, type: 3}
-  m_Name: Bullet
+  m_Script: {fileID: 11500000, guid: 138b2dff278de4ece9b22afd37ae9b80, type: 3}
+  m_Name: StickyCell
   m_EditorClassIdentifier: 
-  cardTitle: 
-  cardDescription:
-    baseAmount: 
-  cardEffect:
-    baseAmount: 0
-  buffAmount:
-    baseAmount: 0
-  cardIcon: {fileID: 0}
-  cardShape: 0
-  cardType: 0
-  cardTargetType: 1
+  title: 
+  description: 
+  thumbnail: {fileID: 0}
+  shape: 0
+  type: 2
+  floodingTimes: 1
+  buff:
+    type: 2
+    logic: 0

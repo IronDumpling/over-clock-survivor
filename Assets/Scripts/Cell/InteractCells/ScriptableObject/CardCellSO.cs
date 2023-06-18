@@ -4,71 +4,35 @@ using UnityEngine;
 
 public class CardCellSO : ScriptableObject
 {
-    public string cardTitle;
-    public CardDescription cardDescription;
+    public string title = "New Card Cell";
+    public string description;
+    public Sprite thumbnail;
 
-    public CardAmount cardEffect;
-    public CardAmount buffAmount;
-    public Sprite cardIcon;
+    public CardShape shape;
+    public CardType type;
 
-    public CardShape cardShape;
-    public enum CardShape
-    {
-        L4, L5,
-        T4, T5,
-        I4, 
-        O4, O6, O8,
-        Z4
-    }
-
-    public CardType cardType;
-    public enum CardType
-    {
-        Attack,
-        Shield,
-        Support,
-        Recover,
-        Move,
-        Resource,
-        None
-    }
-
-    public CardTargetType cardTargetType;
-    public enum CardTargetType
-    {
-        self, enemy
-    };
-
-    //public int GetCardEffectAmount()
-    //{
-    //     return cardEffect.baseAmount;
-    //}
-    //public string GetCardDescriptionAmount()
-    //{
-    //    return cardDescription.baseAmount;
-    //}
-    //public int GetBuffAmount()
-    //{
-    //     return buffAmount.baseAmount;
-    //}
+    public int floodingTimes = 1;
 }
 
 [System.Serializable]
-public struct CardAmount
+public enum CardShape
 {
-    public int baseAmount;
+    L4, L5,
+    T4, T5,
+    I4,
+    O4, O6, O8,
+    Z4
 }
 
 [System.Serializable]
-public struct CardDescription
+public enum CardType
 {
-    public string baseAmount;
-}
-
-[System.Serializable]
-public struct CardBuffs
-{
-    //public Buff.Type buffType;
-    public CardAmount buffAmount;
+    Attack,
+    Shield,
+    Support,
+    Recover,
+    Move,
+    Resource,
+    None
 }
 
