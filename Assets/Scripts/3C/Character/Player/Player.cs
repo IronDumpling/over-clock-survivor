@@ -87,6 +87,7 @@ public class Player : MonoSingleton<Player>
 
     private DanmakuManager danmakuMng;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRender;
 
     public IntChangeEvent onLevelChange;
     public TwoFloatChangeEvent onEnergyChange;
@@ -98,6 +99,7 @@ public class Player : MonoSingleton<Player>
         base.Init();
 
         rb = GetComponent<Rigidbody2D>();
+        spriteRender = GetComponent<SpriteRenderer>();
         danmakuMng = transform.parent.Find("PlayerDanmaku").GetComponent<DanmakuManager>();
 
         onEnergyChange.AddListener(OnEnergyChange);
@@ -256,6 +258,17 @@ public class Player : MonoSingleton<Player>
     public void HandleMovement(float horizontal, float vertical)
     {
         rb.velocity = new Vector2(horizontal, vertical) * m_moveSpeed;
+        SpriteFlip(horizontal);
+    }
+
+    #endregion
+
+    #region Render
+
+    private void SpriteFlip(float horizontal)
+    {
+        if (horizontal < 0) spriteRender.flipX = true;
+        else if (horizontal > 0) spriteRender.flipX = false;
     }
 
     #endregion

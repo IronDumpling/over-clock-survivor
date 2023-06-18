@@ -32,7 +32,7 @@ public class CardCell : Cell
     public void Execute()
     {
         if (!CanRun) return;
-        DebugLogger.Log(this.name, "is activated");
+        //DebugLogger.Log(this.name, "is activated");
         ActivateSelf();
         CanRun = false;
     }
