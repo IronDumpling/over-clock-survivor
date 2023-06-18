@@ -6,7 +6,13 @@ using Random = UnityEngine.Random;
 
 public class Danmaku : MonoBehaviour
 {
-    public float dmg = 5;
+    private float _dmg = 5;
+    public float m_dmg
+    {
+        get => _dmg;
+        set => _dmg = value;
+    }
+
     private float speed = 10f;
     private float lifeSpan = 10f;
 
@@ -79,7 +85,7 @@ public class Danmaku : MonoBehaviour
 
     #region Interaction
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.gameObject.layer)
         {
@@ -97,24 +103,19 @@ public class Danmaku : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-    }
-
     private void CollideObstacle(GameObject obstacle)
     {
-
+        Death();
     }
 
     private void CollideEnemy(GameObject enemy)
     {
-
+        Death();
     }
 
     private void CollidePlayer(GameObject player)
     {
-
+        
     }
 
     #endregion

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-public class Player : MonoSingleton<Player>, IDanInteractable
+public class Player : MonoSingleton<Player>
 {
     [SerializeField] private PlayerSO playerData;
 

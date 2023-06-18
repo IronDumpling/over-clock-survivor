@@ -1,7 +1,7 @@
 using UnityEngine;
 using Pathfinding;
 
-public class Enemy : MonoBehaviour, IDanInteractable
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemySO enemyData;
     [SerializeField] private GameObject particlePrefab;
@@ -162,10 +162,13 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerUtil.BULLET_LAYER)
+        switch (collision.gameObject.layer)
         {
-            // TODO: Bullet Would Collide Multiple Times
-            CollideDanmaku(collision.gameObject);
+            case LayerUtil.DANMAKU_LAYER:
+                CollideDanmaku(collision.gameObject);
+                break;
+            default:
+                break;
         }
     }
 
@@ -186,7 +189,7 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     private void CollideDanmaku(GameObject danmaku)
     {
-        CurrHealthDown(danmaku.GetComponent<Danmaku>().dmg);
+        CurrHealthDown(danmaku.GetComponent<Danmaku>().m_dmg);
     }
 
     private void CollidePlayer(GameObject player)

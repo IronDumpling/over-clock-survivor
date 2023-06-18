@@ -12,19 +12,16 @@ public class DanmakuManager : MonoBehaviour
     {
         CellCommand c = CellManager.Instance.ComsumeCommand();
 
-        if (c != null)
+        if (c == null) return;
+        
+        switch (c.type)
         {
-            switch (c.type)
-            {
-                case CellType.Attack:
-
-                    for (int i = 0; i < c.multiTimes; i++)
-                    {
-                        SpawnDanmaku(c, position);
-                    }
-
-                    break;
-            }
+            case CellType.Attack:
+                for (int i = 0; i < c.multiTimes; i++)
+                {
+                    SpawnDanmaku(c, position);
+                }
+                break;
         }
     }
 
@@ -33,7 +30,7 @@ public class DanmakuManager : MonoBehaviour
         GameObject danmaku = Instantiate(attackPrefab, position, Quaternion.identity);
         danmaku.transform.SetParent(gameObject.transform);
         danmaku.transform.localScale *= c.scaleMultiTimes;
-        danmaku.GetComponent<Danmaku>().dmg = c.dmg;
+        danmaku.GetComponent<Danmaku>().m_dmg = c.dmg;
     }
 }
 
