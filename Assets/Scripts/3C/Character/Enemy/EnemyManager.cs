@@ -5,14 +5,13 @@ using Common;
 
 public class EnemyManager : MonoSingleton<EnemyManager>
 {
-    [SerializeField] private GameObject enemyPrefab;
-    
     private Timer spawnTimer;
     private GridGraph nav;
     private Transform enemyParent;
-    public Transform particleParent;
+    [HideInInspector] public Transform particleParent;
 
     public float spawnInterval = 5f;
+    [SerializeField] private List<GameObject> enemyPrefabs;
     public List<GameObject> enemies;
 
     // Start is called before the first frame update
@@ -31,7 +30,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     // Update is called once per frame
     void Update()
     {
-        spawnTimer.Update(Time.deltaTime);
+        spawnTimer.Update(Time.deltaTime, enemyPrefabs[0]);
     }
 
     Vector3 RandomPosition()
@@ -41,10 +40,10 @@ public class EnemyManager : MonoSingleton<EnemyManager>
         return new Vector3(x + transform.position.x, y + transform.position.y, 0f);
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy(GameObject enemy)
     {
         Vector3 randomPosition = RandomPosition();
-        GameObject spwanedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+        GameObject spwanedEnemy = Instantiate(enemy, randomPosition, Quaternion.identity);
         spwanedEnemy.transform.SetParent(enemyParent);
         spwanedEnemy.name = $"Enemy_{enemies.Count}";
         enemies.Add(spwanedEnemy);

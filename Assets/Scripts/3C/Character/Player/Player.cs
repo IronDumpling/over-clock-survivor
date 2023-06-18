@@ -88,9 +88,6 @@ public class Player : MonoSingleton<Player>, IDanInteractable
     private DanmakuManager danmakuMng;
     private Rigidbody2D rb;
 
-    const int ENEMY_LAYER = 8;
-    const int ENERGY_PARTICLE_LAYER = 9;
-
     public IntChangeEvent onLevelChange;
     public TwoFloatChangeEvent onEnergyChange;
     public TwoFloatChangeEvent onHealthChange;
@@ -263,18 +260,58 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     #endregion
 
+    #region Interaction
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == ENEMY_LAYER)
+        if (collision.gameObject.layer == LayerUtil.ENERGY_PARTICLE_LAYER)
         {
-            CurrHealthDown(collision.gameObject.GetComponent<Enemy>().m_dmg);
-        }
-        else if (collision.gameObject.layer == ENERGY_PARTICLE_LAYER)
-        {
-            EnergyParticle energy = collision.gameObject?.GetComponent<EnergyParticle>();
-            GainEnergy(energy.m_energy);
-            FreqUp(energy.m_freq);
-            energy.Death();
+            CollideEnergyParticle(collision.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.layer)
+        {
+            case LayerUtil.ENEMY_LAYER:
+                CollideEnemy(collision.gameObject);
+                break;
+            case LayerUtil.OBSTACLE_LAYER:
+                CollideObstacle(collision.gameObject);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void CollideEnemy(GameObject enemy)
+    {
+        CurrHealthDown(enemy.GetComponent<Enemy>().m_dmg);
+    }
+
+    private void CollideDanmaku(GameObject danmaku)
+    {
+
+    }
+
+    private void CollideEnergyParticle(GameObject particle)
+    {
+        EnergyParticle energy = particle.GetComponent<EnergyParticle>();
+        GainEnergy(energy.m_energy);
+        FreqUp(energy.m_freq);
+        energy.Death();
+    }
+
+    private void CollideObstacle(GameObject obstacle)
+    {
+
+    }
+
+    private void CollideTrap(GameObject trap)
+    {
+
+    }
+
+    #endregion
 }

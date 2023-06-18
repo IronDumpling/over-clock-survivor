@@ -16,7 +16,7 @@ MonoBehaviour:
   currHealth: 20
   fullHealth: 20
   enemyName: White Cell-Alpha
-  enemySprite: {fileID: 21300000, guid: 41893bf2224b04281851f94bb89c4a31, type: 3}
+  enemySprite: {fileID: 21300000, guid: 654610f49221f4f44a1d313a38a0363e, type: 3}
   target: Player/PlayerSprite
   dmg: 10
   energy:

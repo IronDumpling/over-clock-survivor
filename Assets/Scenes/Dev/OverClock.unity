@@ -1769,6 +1769,22 @@ PrefabInstance:
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 5509365141163506294, guid: c768523bd971a4020b89bf9f404517d9, type: 3}
+    - target: {fileID: 5324756174017939005, guid: 7a3beacb443994c68abbb984099ead92, type: 3}
+      propertyPath: spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324756174017939005, guid: 7a3beacb443994c68abbb984099ead92, type: 3}
+      propertyPath: enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324756174017939005, guid: 7a3beacb443994c68abbb984099ead92, type: 3}
+      propertyPath: enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5509365141163506294, guid: e5f6fee8a779d4ab7a6c04c21a928d4f, type: 3}
+    - target: {fileID: 5324756174017939005, guid: 7a3beacb443994c68abbb984099ead92, type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 5509365141163506294, guid: c768523bd971a4020b89bf9f404517d9, type: 3}
     - target: {fileID: 5324756174017939006, guid: 7a3beacb443994c68abbb984099ead92, type: 3}
       propertyPath: m_Name
       value: EnemyManager

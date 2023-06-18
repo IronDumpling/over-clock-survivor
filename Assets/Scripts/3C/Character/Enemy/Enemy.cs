@@ -60,10 +60,20 @@ public class Enemy : MonoBehaviour, IDanInteractable
         }
     }
 
+    private Sprite _sprite;
+    public Sprite m_sprite
+    {
+        get => _sprite;
+        private set
+        {
+            _sprite = value;
+            spriteRender.sprite = _sprite;
+        }
+    }
+
     private AIPath aiPath;
     private AIDestinationSetter aiDest;
-
-    const int BULLET_LAYER = 6;
+    private SpriteRenderer spriteRender;
 
     public FloatChangeEvent onHealthChange;
 
@@ -71,6 +81,7 @@ public class Enemy : MonoBehaviour, IDanInteractable
     {
         aiDest = gameObject.GetComponent<AIDestinationSetter>();
         aiPath = gameObject.GetComponent<AIPath>();
+        spriteRender = gameObject.GetComponent<SpriteRenderer>();
 
         onHealthChange.AddListener(OnHealthChange);
     }
@@ -87,6 +98,7 @@ public class Enemy : MonoBehaviour, IDanInteractable
         m_dmg = enemyData.dmg;
         m_moveSpeed = enemyData.moveSpeed;
         m_target = enemyData.target;
+        m_sprite = enemyData.enemySprite;
     }
 
     #region Health
@@ -117,16 +129,18 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     #endregion
 
+    #region Energy Particle
+
     private void SpawnEnergyParticle()
     {
         Transform particleParent = EnemyManager.Instance.particleParent;
         for (int i = 0; i < enemyData.energy.quantity; i++)
         {
             GameObject particle = Instantiate(particlePrefab, RandomPosition(), Quaternion.identity);
-            EnergyParticle energy = particle?.GetComponent<EnergyParticle>();
             particle.transform.SetParent(particleParent);
             particle.name = $"Energy_Particle_{i}";
 
+            EnergyParticle energy = particle?.GetComponent<EnergyParticle>();
             energy.m_energy = enemyData.energy.energyAmount;
             energy.m_freq = enemyData.energy.freqAmount;
             energy.m_color = enemyData.energy.color;
@@ -142,12 +156,53 @@ public class Enemy : MonoBehaviour, IDanInteractable
         return new Vector3(x + transform.position.x, y + transform.position.y, 0f);
     }
 
+    #endregion
+
+    #region Interaction
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == BULLET_LAYER)
+        if (collision.gameObject.layer == LayerUtil.BULLET_LAYER)
         {
             // TODO: Bullet Would Collide Multiple Times
-            CurrHealthDown(collision.gameObject.GetComponent<Danmaku>().dmg);
+            CollideDanmaku(collision.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.layer)
+        {
+            case LayerUtil.OBSTACLE_LAYER:
+                CollideObstacle(collision.gameObject);
+                break;
+            case LayerUtil.PLAYER_LAYER:
+                CollidePlayer(collision.gameObject);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void CollideDanmaku(GameObject danmaku)
+    {
+        CurrHealthDown(danmaku.GetComponent<Danmaku>().dmg);
+    }
+
+    private void CollidePlayer(GameObject player)
+    {
+
+    }
+
+    private void CollideObstacle(GameObject obstacle)
+    {
+
+    }
+
+    private void CollideTrap(GameObject trap)
+    {
+
+    }
+
+    #endregion
 }

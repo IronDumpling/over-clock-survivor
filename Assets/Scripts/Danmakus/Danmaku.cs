@@ -7,26 +7,37 @@ using Random = UnityEngine.Random;
 public class Danmaku : MonoBehaviour
 {
     public float dmg = 5;
-    public float speed = 10f;
+    private float speed = 10f;
+    private float lifeSpan = 10f;
 
     private void Awake()
     {
-        Invoke(nameof(DestroySelf), 5f);
-        GetDirection();
+        Birth();
     }
 
-    void DestroySelf()
+    #region Life Cycle
+
+    void Birth()
+    {
+        Invoke(nameof(Death), lifeSpan);
+        Movement();
+    }
+
+    void Death()
     {
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+
+    #region Movement
+
+    void Movement()
     {
-        
+        EmitToClosest();
     }
 
-    void GetDirection()
+    void EmitToClosest()
     {
         GameObject closestEnemy = EnemyManager.Instance.GetClosestEnemy(transform);
 
@@ -38,9 +49,73 @@ public class Danmaku : MonoBehaviour
         }
         else
         {
-            Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-            randomDirection.Normalize();
-            GetComponent<Rigidbody2D>().velocity = randomDirection * speed;
+            RandomEmit();
         }
     }
+
+    void RandomEmit()
+    {
+        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+        randomDirection.Normalize();
+        GetComponent<Rigidbody2D>().velocity = randomDirection * speed;
+    }
+
+    void RandomGenerate()
+    {
+
+    }
+
+    void RotateAroundPlayer()
+    {
+
+    }
+
+    void GenerateAtPlayer()
+    {
+
+    }
+
+    #endregion
+
+    #region Interaction
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.layer)
+        {
+            case LayerUtil.ENEMY_LAYER:
+                CollideEnemy(collision.gameObject);
+                break;
+            case LayerUtil.OBSTACLE_LAYER:
+                CollideObstacle(collision.gameObject);
+                break;
+            case LayerUtil.PLAYER_LAYER:
+                CollidePlayer(collision.gameObject);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
+
+    private void CollideObstacle(GameObject obstacle)
+    {
+
+    }
+
+    private void CollideEnemy(GameObject enemy)
+    {
+
+    }
+
+    private void CollidePlayer(GameObject player)
+    {
+
+    }
+
+    #endregion
 }
