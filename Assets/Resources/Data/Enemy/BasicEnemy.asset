@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  currHealth: 0
+  currHealth: 15
   fullHealth: 15
   enemyName: Killer
   target: Player/PlayerSprite

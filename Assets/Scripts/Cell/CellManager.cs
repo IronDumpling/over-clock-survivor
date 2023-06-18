@@ -24,7 +24,6 @@ public class CellManager : Common.Singleton<CellManager>
     public void DeleteCell(CardCell cell)
     {
         cellList.Remove(cell);
-        
     }
 
     public void ResetCellListRun()

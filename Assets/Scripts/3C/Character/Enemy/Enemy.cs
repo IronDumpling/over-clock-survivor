@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour, IDanInteractable
         {
             _currHealth = Mathf.Min(value, _fullHealth);
             _currHealth = Mathf.Max(_currHealth, 0f);
-            enemyData.currHealth = _currHealth;
             onHealthChange.Invoke(m_currHealth);
         }
     }
@@ -26,7 +25,6 @@ public class Enemy : MonoBehaviour, IDanInteractable
         private set
         {
             _fullHealth = value;
-            enemyData.fullHealth = _fullHealth;
         }
     }
 
@@ -37,7 +35,6 @@ public class Enemy : MonoBehaviour, IDanInteractable
         private set
         {
             _dmg = value;
-            enemyData.dmg = _dmg;
         }
     }
 
@@ -48,7 +45,7 @@ public class Enemy : MonoBehaviour, IDanInteractable
         private set
         {
             _moveSpeed = value;
-            enemyData.moveSpeed = _moveSpeed;
+            aiPath.maxSpeed = _moveSpeed;
         }
     }
 
@@ -59,9 +56,12 @@ public class Enemy : MonoBehaviour, IDanInteractable
         private set
         {
             _target = value;
-            enemyData.target = _target;
+            aiDest.target = GameObject.Find(_target)?.transform;
         }
     }
+
+    private AIPath aiPath;
+    private AIDestinationSetter aiDest;
 
     const int BULLET_LAYER = 6;
 
@@ -69,19 +69,27 @@ public class Enemy : MonoBehaviour, IDanInteractable
 
     private void Awake()
     {
-        Birth();
-        gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find(m_target).transform;
+        aiDest = gameObject.GetComponent<AIDestinationSetter>();
+        aiPath = gameObject.GetComponent<AIPath>();
+
         onHealthChange.AddListener(OnHealthChange);
+    }
+
+    private void Start()
+    {
+        Birth();
     }
 
     private void Birth()
     {
-        m_currHealth = enemyData.currHealth;
         m_fullHealth = enemyData.fullHealth;
+        m_currHealth = enemyData.currHealth;
         m_dmg = enemyData.dmg;
         m_moveSpeed = enemyData.moveSpeed;
         m_target = enemyData.target;
     }
+
+    #region Health
 
     private void CurrHealthDown(float dmg)
     {
@@ -106,6 +114,8 @@ public class Enemy : MonoBehaviour, IDanInteractable
         EnemyManager.Instance.enemies.Remove(gameObject);
         Destroy(gameObject);
     }
+
+    #endregion
 
     private void SpawnEnergyParticle()
     {

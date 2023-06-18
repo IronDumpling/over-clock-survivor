@@ -5,17 +5,28 @@ using UnityEngine;
 public class CardCell : Cell
 {
     public bool CanRun { get; set; }
-    public CardCellSO cardCellData;
+    private CardCellSO cardCellData;
+
+    private string _title;
+    public string m_title
+    {
+        get => _title;
+        private set
+        {
+            _title = value;
+            cardCellData.title = _title;
+        }
+    }
 
     protected override void Init()
     {
         base.Init();
-        LoadData();
+        Birth();
     }
 
-    protected virtual void LoadData()
+    protected virtual void Birth()
     {
-
+        m_title = cardCellData.title;
     }
 
     public void Execute()
