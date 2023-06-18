@@ -6,9 +6,13 @@ using UnityEngine;
 public class EnemySO : CharacterSO
 {
     public float fullHealth;
+
     public string enemyName;
+    public Sprite enemySprite;
+
     public string target;
     public float dmg;
+
     public EnergyParticles energy;
 
     [System.Serializable]

@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec0e9ba92bcdd430eb82e17d342eddca, type: 3}
-  m_Name: BasicEnemy
+  m_Name: WhiteCell-2
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  currHealth: 15
-  fullHealth: 15
-  enemyName: Killer
+  moveSpeed: 8
+  currHealth: 10
+  fullHealth: 10
+  enemyName: White Cell-Beta
+  enemySprite: {fileID: 21300000, guid: adcb07992264e407f817d59586fab7c2, type: 3}
   target: Player/PlayerSprite
-  dmg: 10
+  dmg: 5
   energy:
-    energyAmount: 10
+    energyAmount: 20
     freqAmount: 0.1
-    quantity: 2
-    color: {r: 1, g: 0.58977896, b: 0.0990566, a: 1}
+    quantity: 1
+    color: {r: 0.4788855, g: 0.070977226, b: 0.5188679, a: 1}
     sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
