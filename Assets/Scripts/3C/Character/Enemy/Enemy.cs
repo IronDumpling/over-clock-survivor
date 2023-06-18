@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IDanInteractable
         private set
         {
             _currHealth = Mathf.Min(value, _fullHealth);
-            _currHealth = Mathf.Max(value, 0f);
+            _currHealth = Mathf.Max(_currHealth, 0f);
             enemyData.currHealth = _currHealth;
             onHealthChange.Invoke(m_currHealth);
         }
