@@ -18,7 +18,6 @@ public class Player : MonoSingleton<Player>, IDanInteractable
         {
             _level = Mathf.Min(value, _maxLevel);
             _level = Mathf.Max(_level, 0);
-            Debug.Log($"max level: {_maxLevel}, manipulated level: {_level}");
             playerData.voltage.level = _level;
             onLevelChange.Invoke(_level);
         }
@@ -180,7 +179,6 @@ public class Player : MonoSingleton<Player>, IDanInteractable
 
     public void LevelUpTo(int level)
     {
-        Debug.Log($"Try to level Up to {level}");
         m_level = level;
     }
 
