@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
         {
             _currHealth = Mathf.Min(value, _fullHealth);
             _currHealth = Mathf.Max(_currHealth, 0f);
-            onHealthChange.Invoke(m_currHealth);
+            onHealthChange.Invoke(_currHealth, m_fullHealth);
         }
     }
 
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     private AIDestinationSetter aiDest;
     private SpriteRenderer spriteRender;
 
-    public FloatChangeEvent onHealthChange;
+    public TwoFloatChangeEvent onHealthChange;
 
     private void Awake()
     {
@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
         m_currHealth += recover;
     }
 
-    private void OnHealthChange(float currHealth)
+    private void OnHealthChange(float currHealth, float fullHealth)
     {
         if (currHealth <= 0) Death();
     }

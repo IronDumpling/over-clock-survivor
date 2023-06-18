@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5509365141163506184}
   - component: {fileID: 8307709392937957546}
   m_Layer: 8
-  m_Name: WhiteCellAlpha
+  m_Name: EmptyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2570239306211341264}
+  - {fileID: 6393184489346250671}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 654610f49221f4f44a1d313a38a0363e, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5509365141163506292
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a088c4d5988347099fd05d398dc0484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 45eea887b298d41f5970f33281d5ccba, type: 2}
+  enemyData: {fileID: 0}
   particlePrefab: {fileID: 5824876601532753663, guid: 2eceda57ee07a4a3e84730f08aceb8a8, type: 3}
   onHealthChange:
     m_PersistentCalls:
@@ -239,7 +239,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1001 &8743039187047962619
+--- !u!1001 &164372258724008836
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -304,15 +304,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6556907739722376235, guid: 32ed2e2b6eba64b338f45dca277b7527, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6556907739722376235, guid: 32ed2e2b6eba64b338f45dca277b7527, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6556907739722376235, guid: 32ed2e2b6eba64b338f45dca277b7527, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6556907739722376235, guid: 32ed2e2b6eba64b338f45dca277b7527, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -336,8 +336,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32ed2e2b6eba64b338f45dca277b7527, type: 3}
---- !u!224 &2570239306211341264 stripped
+--- !u!224 &6393184489346250671 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6556907739722376235, guid: 32ed2e2b6eba64b338f45dca277b7527, type: 3}
-  m_PrefabInstance: {fileID: 8743039187047962619}
+  m_PrefabInstance: {fileID: 164372258724008836}
   m_PrefabAsset: {fileID: 0}
