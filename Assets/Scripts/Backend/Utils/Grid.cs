@@ -18,6 +18,24 @@ public class Grid<TGridObject>
     private Vector3 originPosition;
     private TGridObject[,] gridArray;
 
+    public Grid(int width, int height, float cellSize, Vector3 originPosition)
+    {
+        this.width = width;
+        this.height = height;
+        this.cellSize = cellSize;
+        this.originPosition = originPosition;
+
+        gridArray = new TGridObject[width, height];
+
+        for (int x = 0; x < gridArray.GetLength(0); x++)
+        {
+            for (int y = 0; y < gridArray.GetLength(1); y++)
+            {
+                gridArray[x, y] = default(TGridObject);
+            }
+        }
+    }
+
     public Grid(int width, int height, float cellSize, Vector3 originPosition,
         Func<Grid<TGridObject>, int, int, TGridObject> createGridObject)
     {

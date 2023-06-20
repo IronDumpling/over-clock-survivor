@@ -5,38 +5,43 @@ using System.Collections.Generic;
 public class TileManager : MonoBehaviour
 {
 	[SerializeField] private int _width, _height;
-	[SerializeField] private Tile _tilePrefab;
+	[SerializeField] private GameObject _tilePrefab;
 	
-	private int _widthScale, _heightScale;
-	private Grid<Tile> _tiles;
+	private int _scale;
+	private Grid<GameObject> _tiles;
 
-    private void Awake()
-    {
-		_widthScale = (int)_tilePrefab.transform.localScale.x;
-		_heightScale = (int)_tilePrefab.transform.localScale.y;
-
-		GenerateTile();
-
-		//_tiles = new Grid<Tile>(_width, _height, _widthScale, transform.position, createGridObject: (Tile, x, y) =>
-		//{
-		//	return Tile();
-		//});
-	}
-
-    public void GenerateTile()
+	private void Awake()
 	{
-		for(int col = 0; col < _width * _widthScale; col+=_widthScale)
-		{
-			for(int row = 0; row < _height * _heightScale; row+=_heightScale)
-			{
-				Vector3 position = new Vector3(gameObject.transform.position.x + col,
-											   gameObject.transform.position.y + row, 1f);
+		_scale = (int)_tilePrefab.transform.localScale.x;
 
-                var spwanedTile = Instantiate(_tilePrefab, position, Quaternion.identity);
-				spwanedTile.name = $"Tile_{col}_{row}";
-				spwanedTile.transform.SetParent(gameObject.transform);
-            }
-		}
+		//GenerateTile();
+
+		_tiles = new Grid<GameObject>(_width, _height, _scale, transform.position,
+			createGridObject: (Grid, x, y) =>
+		{
+            Vector3 position = new Vector3(x * _scale + transform.position.x,
+										   y * _scale + transform.position.y, 1f);
+			GameObject spwanedTile = Instantiate(_tilePrefab, position, Quaternion.identity);
+            spwanedTile.name = $"Tile_{x}_{y}";
+            spwanedTile.transform.SetParent(gameObject.transform);
+			return spwanedTile;
+		});
 	}
+
+	//public void GenerateTile()
+	//{
+	//	for(int col = 0; col < _width * _scale; col+=_scale)
+	//	{
+	//		for(int row = 0; row < _height * _scale; row+=_scale)
+	//		{
+	//			Vector3 position = new Vector3(gameObject.transform.position.x + col,
+	//										   gameObject.transform.position.y + row, 1f);
+
+	//			var spwanedTile = Instantiate(_tilePrefab, position, Quaternion.identity);
+	//			spwanedTile.name = $"Tile_{col}_{row}";
+	//			spwanedTile.transform.SetParent(gameObject.transform);
+	//		}
+	//	}
+	//}
 }
 

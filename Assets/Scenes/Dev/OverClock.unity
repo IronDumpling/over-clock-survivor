@@ -892,7 +892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 50
   _height: 50
-  _tilePrefab: {fileID: -8515004959455078098, guid: 108a3f97ec8b94f18856fdbb73cec89f, type: 3}
+  _tilePrefab: {fileID: 7866899368270461601, guid: 108a3f97ec8b94f18856fdbb73cec89f, type: 3}
 --- !u!4 &1072699363
 Transform:
   m_ObjectHideFlags: 0
