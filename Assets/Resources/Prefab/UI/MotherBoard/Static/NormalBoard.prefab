@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7471640432517724580}
   - component: {fileID: 1320805665447657014}
   m_Layer: 0
-  m_Name: NormalGrid
+  m_Name: NormalBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

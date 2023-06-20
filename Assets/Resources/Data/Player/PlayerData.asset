@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb007d8db6dc4437ab841bcdaf292b1, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 27.3
-  currHealth: 275
+  moveSpeed: 19
+  currHealth: 110
   naturalFreqDrop: 0.1
   fullHealthList:
   - 50
@@ -41,7 +41,7 @@ MonoBehaviour:
     - 450
     - 500
   frequency:
-    currFreq: 54.56503
+    currFreq: 37.961025
     lowerBounds:
     - 5
     - 10
