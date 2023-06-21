@@ -199,33 +199,33 @@ MonoBehaviour:
   path:
     wpLengths:
     - 0
-    - 0
+    - 107
     - 7
     - 7
     - 8
     - 7
-    - 1
+    - 108
     wps:
-    - {x: -110, y: 3, z: 0}
+    - {x: -3, y: 3, z: 0}
     - {x: -110, y: 3, z: 0}
     - {x: -103, y: 3, z: 0}
     - {x: -103, y: -4, z: 0}
     - {x: -111, y: -4, z: 0}
     - {x: -111, y: 3, z: 0}
-    - {x: -110, y: 3, z: 0}
+    - {x: -3, y: 3, z: 0}
     type: 0
     subdivisionsXSegment: 10
     subdivisions: 70
     controlPoints: []
-    length: 30
+    length: 244
     isFinalized: 1
     timesTable:
     - 0
-    - 0
-    - 0.23333333
-    - 0.46666667
-    - 0.73333335
-    - 0.96666664
+    - 0.4385246
+    - 0.46721312
+    - 0.49590164
+    - 0.52868855
+    - 0.55737704
     - 1
     lengthsTable: []
   inspectorMode: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   showIndexes: 1
   showWpLength: 0
   pathColor: {r: 1, g: 1, b: 1, a: 0.5}
-  lastSrcPosition: {x: -110, y: 3, z: 0}
+  lastSrcPosition: {x: -3, y: 3, z: 0}
   lastSrcRotation: {x: -0, y: -0, z: -0, w: 1}
   wpsDropdown: 1
   dropToFloorOffset: 0
