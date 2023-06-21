@@ -13,21 +13,6 @@ public class InputManager : MonoSingleton<InputManager>
         Player.Instance.HandleMovement(horizontal, vertical);
 
         // Call MotherBroad
-        if (Input.GetKeyDown(KeyCode.Space)) HandleMotherBoard();
-    }
-
-    private void HandleMotherBoard()
-    {
-        int idx = CameraManager.Instance.GetCurCameraIdx();
-        if (idx == 0)
-        {
-            CameraManager.Instance.SwitchCameraByIdx(idx + 1);
-            GameManager.Instance.PauseGame();
-        }
-        else
-        {
-            CameraManager.Instance.SwitchCameraByIdx(idx - 1);
-            GameManager.Instance.ResumeGame();
-        }   
+        if (Input.GetKeyDown(KeyCode.Space)) MotherBoardUI.Instance.HandleMotherBoard();
     }
 }

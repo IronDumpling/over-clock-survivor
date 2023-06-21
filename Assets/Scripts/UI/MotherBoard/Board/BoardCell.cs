@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalTile : Tile
+public class BoardCell : Cell
 {
     [SerializeField] private Color _baseColor, _offsetColor;
     [HideInInspector] public bool _isOffset;
 
     protected override void Init()
     {
-        base.Init();
+        base.Init();        
     }
 
     public virtual void SetColor()
     {
-        _renderer.color = _isOffset ? _offsetColor : _baseColor;
+        _img.color = _isOffset ? _offsetColor : _baseColor;
     }
 }

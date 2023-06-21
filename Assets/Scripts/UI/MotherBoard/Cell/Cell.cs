@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Cell : MonoBehaviour
 {
-    public CellType type = CellType.None;
-    [SerializeField] protected SpriteRenderer _renderer;
+    protected Image _img;
+    protected RectTransform _rectTrans;
+    protected CellType m_type = CellType.None;
 
     private void Awake()
     {
@@ -15,6 +17,7 @@ public abstract class Cell : MonoBehaviour
 
     protected virtual void Init()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        _img = GetComponent<Image>();
+        _rectTrans = GetComponent<RectTransform>();
     }
 }

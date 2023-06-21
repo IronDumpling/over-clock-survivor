@@ -29,7 +29,7 @@ public class CameraManager : MonoSingleton<CameraManager>
         _brain.m_DefaultBlend = customBlend;
     }
 
-    public void SwitchCameraByIdx(int idx)
+    public void SwitchCamera(int idx)
     {
         if (idx < 0 || idx >= cameraList.Length)
             DebugLogger.Error(this.name, $"The wanted switch camera No.{idx} does not exist");
@@ -40,7 +40,7 @@ public class CameraManager : MonoSingleton<CameraManager>
         PriorityCheck();
     }
 
-    public void SwitchCameraByObj(CinemachineVirtualCamera switchVC)
+    public void SwitchCamera(CinemachineVirtualCamera switchVC)
     {
         switchVC.m_Priority = 10;
         if (curCamera) curCamera.m_Priority = 0;

@@ -7,9 +7,10 @@ public class SupportCell : CardCell
     [SerializeField] private int multiTimes = 2;
     [SerializeField] private float scaleMultiTimes = 1.2f;
     [SerializeField] private int dmg = 3;
+
     private void Awake()
     {
-        type = CellType.Support;
+        
     }
     
     protected override void ActivateSelf()

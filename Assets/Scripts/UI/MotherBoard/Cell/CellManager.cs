@@ -74,14 +74,6 @@ public class CellManager : Common.Singleton<CellManager>
     }
 }
 
-public enum CellType
-{
-    Attack,
-    Support,
-    Shield,
-    None
-}
-
 public class CellCommand
 {
     public CellType type;

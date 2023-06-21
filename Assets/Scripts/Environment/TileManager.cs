@@ -22,6 +22,11 @@ public class TileManager : MonoBehaviour
 			GameObject spwanedTile = Instantiate(_tilePrefab, position, Quaternion.identity);
             spwanedTile.name = $"Tile_{x}_{y}";
             spwanedTile.transform.SetParent(gameObject.transform);
+
+			NormalTile tile = spwanedTile.GetComponent<NormalTile>();
+            tile._isOffset = (x % 2f == 0 && y % 2f != 0) || (x % 2f != 0 && y % 2f == 0);
+			tile.SetColor();
+
 			return spwanedTile;
 		});
 	}

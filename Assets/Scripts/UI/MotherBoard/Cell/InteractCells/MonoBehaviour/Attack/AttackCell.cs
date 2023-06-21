@@ -7,7 +7,7 @@ public class AttackCell : CardCell
 {
     private void Awake()
     {
-        type = CellType.Attack;
+        
     }
     
     protected override void ActivateSelf()

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1071594408102808452
+--- !u!1 &4970717682449761077
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1071594408102808453}
-  - component: {fileID: 1909121484018775771}
+  - component: {fileID: 8899656543357031794}
+  - component: {fileID: 5867853375930867453}
   m_Layer: 0
   m_Name: BoardManager
   m_TagString: Untagged
@@ -17,28 +17,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1071594408102808453
-Transform:
+--- !u!224 &8899656543357031794
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071594408102808452}
+  m_GameObject: {fileID: 4970717682449761077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1073, y: -546, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1909121484018775771
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5867853375930867453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071594408102808452}
+  m_GameObject: {fileID: 4970717682449761077}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eff68ac565f724ec188251f705a351ab, type: 3}
@@ -46,4 +51,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 12
   _height: 12
-  _tilePrefab: {fileID: 7471640432517724582, guid: 393b2fd0f0e664d649aa641d77d7c50d, type: 3}
+  _tilePrefab: {fileID: 6970813076478170579, guid: 393b2fd0f0e664d649aa641d77d7c50d, type: 3}

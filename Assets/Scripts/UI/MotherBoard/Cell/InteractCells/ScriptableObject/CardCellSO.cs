@@ -9,7 +9,7 @@ public class CardCellSO : ScriptableObject
     public Sprite thumbnail;
 
     public CardShape shape;
-    public CardType type;
+    public CellType type;
 
     public int floodingTimes = 1;
 }
@@ -25,7 +25,7 @@ public enum CardShape
 }
 
 [System.Serializable]
-public enum CardType
+public enum CellType
 {
     Attack,
     Shield,

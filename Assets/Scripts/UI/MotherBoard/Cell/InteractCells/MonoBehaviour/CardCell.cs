@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CardCell : Cell
 {
-    public bool CanRun { get; set; }
-    private CardCellSO cardCellData;
+    [SerializeField] private CardCellSO cardCellData;
 
     private string _title;
     public string m_title
@@ -18,6 +17,19 @@ public class CardCell : Cell
         }
     }
 
+    private CellType _type;
+    public new CellType m_type
+    {
+        get => _type;
+        private set
+        {
+            _type = value;
+            cardCellData.type = _type;
+        }
+    }
+
+    public bool CanRun { get; set; }
+
     protected override void Init()
     {
         base.Init();
@@ -27,6 +39,7 @@ public class CardCell : Cell
     protected virtual void Birth()
     {
         m_title = cardCellData.title;
+        m_type = cardCellData.type;
     }
 
     public void Execute()
