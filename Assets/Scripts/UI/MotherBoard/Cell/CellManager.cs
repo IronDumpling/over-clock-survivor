@@ -26,13 +26,13 @@ public class CellManager : Common.Singleton<CellManager>
         cellList.Remove(cell);
     }
 
-    public void ResetCellListRun()
-    {
-        foreach (var cell in cellList)
-        {
-            cell.CanRun = true;
-        }
-    }
+    //public void ResetCellListRun()
+    //{
+    //    foreach (var cell in cellList)
+    //    {
+    //        cell.CanRun = true;
+    //    }
+    //}
 
     public void AddCommand(CellCommand command)
     {

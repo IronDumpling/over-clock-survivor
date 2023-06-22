@@ -44,11 +44,10 @@ public class CardCell : Cell
 
     public void Execute()
     {
-        DebugLogger.Log(this.name, $"Try to execute cell: {CanRun}");
-        if (!CanRun) return;
+        //if (!CanRun) return;
         DebugLogger.Log(this.name, "is activated");
         ActivateSelf();
-        CanRun = false;
+        //CanRun = false;
     }
 
     protected virtual void ActivateSelf()

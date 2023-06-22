@@ -11,8 +11,22 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
 {
     private readonly float raycastLength = 40f;
 
+    private RectTransform _rectTrans;
+    private Vector2 _startPos;
+    private readonly float _threshold = 0.05f;
+
+    private HashSet<GameObject> hitObjs = new HashSet<GameObject>();
+
+    private void Awake()
+    {
+        _rectTrans = GetComponent<RectTransform>();
+        _startPos = _rectTrans.position;
+    }
+
     private void Update()
     {
+        //if(_rectTrans.position.x - _startPos.x < _threshold &&
+        //   _rectTrans.position.y - _startPos.y < _threshold) StartNewLoop();
         GenerateRayCast();
     }
 
@@ -37,18 +51,23 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
         EventSystem.current.RaycastAll(eventData, results);
 
         // Check if specific game objects are hit
-        GameObject prevObj = null;
         foreach (var result in results)
         {
-            if(prevObj != result.gameObject)
+            GameObject obj = result.gameObject;
+
+            if (!hitObjs.Contains(obj))
             {
-                CellManager.Instance.ResetCellListRun();
+                hitObjs.Add(obj);
+                obj.transform.GetComponent<CardCell>()?.Execute();
             }
-
-            prevObj = result.gameObject;
-
-            result.gameObject.transform.GetComponent<CardCell>()?.Execute();
         }
+    }
+
+    private void StartNewLoop()
+    {
+        hitObjs.Clear();
+        DebugLogger.Log(this.name, $"{_rectTrans.position}");
+
     }
 
     private void OnDrawGizmosSelected()
@@ -59,24 +78,4 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
         Gizmos.DrawLine(transform.position, transform.position + -transform.right * raycastLength);
         Gizmos.DrawLine(transform.position, transform.position + transform.right * raycastLength);
     }
-
-    //public LayerMask mask;
-    //private Vector2 previousNormal = Vector2.zero;
-    //private RaycastHit2D[] hitInfoList = new RaycastHit2D[4];
-    //private void CheckRayCast()
-    //{
-    //    foreach (var hitInfo in hitInfoList)
-    //    {
-    //        if (hitInfo.collider != null)
-    //        {
-    //            if (previousNormal != hitInfo.normal)
-    //            {
-    //                CellManager.Instance.ResetCellListRun();
-    //            }
-    //            previousNormal = hitInfo.normal;
-
-    //            hitInfo.transform.GetComponent<CardCell>()?.Execute();
-    //        }
-    //    }
-    //}
 }
