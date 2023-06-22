@@ -28,8 +28,6 @@ public class CardCell : Cell
         }
     }
 
-    public bool CanRun { get; set; }
-
     protected override void Init()
     {
         base.Init();
@@ -44,10 +42,8 @@ public class CardCell : Cell
 
     public void Execute()
     {
-        //if (!CanRun) return;
         DebugLogger.Log(this.name, "is activated");
         ActivateSelf();
-        //CanRun = false;
     }
 
     protected virtual void ActivateSelf()

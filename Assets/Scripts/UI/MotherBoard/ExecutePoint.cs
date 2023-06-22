@@ -25,8 +25,7 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
 
     private void Update()
     {
-        //if(_rectTrans.position.x - _startPos.x < _threshold &&
-        //   _rectTrans.position.y - _startPos.y < _threshold) StartNewLoop();
+        if (IsNewLoop()) StartNewLoop();
         GenerateRayCast();
     }
 
@@ -63,11 +62,15 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
         }
     }
 
+    private bool IsNewLoop()
+    {
+        return Mathf.Abs(_rectTrans.position.x - _startPos.x) < _threshold &&
+               Mathf.Abs(_rectTrans.position.y - _startPos.y) < _threshold;
+    }
+
     private void StartNewLoop()
     {
         hitObjs.Clear();
-        DebugLogger.Log(this.name, $"{_rectTrans.position}");
-
     }
 
     private void OnDrawGizmosSelected()

@@ -12,7 +12,7 @@ public class AttackCell : CardCell
     
     protected override void ActivateSelf()
     {
-        CellCommand c = new CellCommand();
+        CellCommand c = new();
         c.type = CellType.Attack;
         c.multiTimes = 1;
         c.scaleMultiTimes = 1;
