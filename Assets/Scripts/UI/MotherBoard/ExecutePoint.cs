@@ -49,10 +49,17 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
         var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
+        //Ray2D ray = new Ray2D(eventData.pointerCurrentRaycast.worldPosition, eventData.pointerCurrentRaycast.worldNormal);
+        //if(Physics2D.Raycast(ray, out RaycastHit2D hit))
+        //{
+        //    Vector3 surfNorm = hit.normal;
+        //}
+
         // Check if specific game objects are hit
         foreach (var result in results)
         {
             GameObject hitObj = result.gameObject;
+            
 
             if (!hitObjs.Contains(hitObj))
             {

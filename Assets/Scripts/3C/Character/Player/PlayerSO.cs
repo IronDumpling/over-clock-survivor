@@ -5,10 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player", menuName = "Character/Player")]
 public class PlayerSO : CharacterSO
 {
-    public float naturalFreqDrop;
-    public List<float> fullHealthList;
+    public Speed speed;
+    public Health health;
     public Voltage voltage;
     public Frequency frequency;
+}
+
+[System.Serializable]
+public struct Speed
+{
+    public float currSpeed;
+    public float minSpeed;
+    public float maxSpeed;
+}
+
+[System.Serializable]
+public struct Health
+{
+    public float currHealth;
+    public List<float> fullHealthList;
 }
 
 [System.Serializable]
@@ -36,6 +51,7 @@ public struct Frequency
     /// Current frequency amount
     /// </summary>
     public float currFreq;
+    public float naturalFreqDrop;
     /// <summary>
     /// A list of the upper and lower frequency bounds,
     /// of the current voltage level
