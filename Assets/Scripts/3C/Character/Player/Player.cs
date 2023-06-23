@@ -125,14 +125,10 @@ public class Player : MonoSingleton<Player>
 
 	void UpdateBounds()
 	{
-		float minFreq;
-		if (playerData.frequency.lowerBounds.TryGetElement(m_level, out minFreq)) _minFreq = minFreq;
-		float maxFreq;
-		if (playerData.frequency.upperBounds.TryGetElement(m_level, out maxFreq)) _maxFreq = maxFreq;
-		float maxEnergy;
-		if (playerData.voltage.energyLimits.TryGetElement(m_level, out maxEnergy)) _maxEnergy = maxEnergy;
-		float fullHealth;
-		if (playerData.health.fullHealthList.TryGetElement(m_level, out fullHealth)) _fullHealth = fullHealth;
+		if (playerData.frequency.lowerBounds.TryGetElement(m_level, out float minFreq)) _minFreq = minFreq;
+		if (playerData.frequency.upperBounds.TryGetElement(m_level, out float maxFreq)) _maxFreq = maxFreq;
+		if (playerData.voltage.energyLimits.TryGetElement(m_level, out float maxEnergy)) _maxEnergy = maxEnergy;
+		if (playerData.health.fullHealthList.TryGetElement(m_level, out float fullHealth)) _fullHealth = fullHealth;
 	}
 
 	void GetFixedBound()
@@ -144,8 +140,7 @@ public class Player : MonoSingleton<Player>
 
         _naturalFreqDrop = playerData.frequency.naturalFreqDrop;
 
-        float fullFreq;
-		if (playerData.frequency.upperBounds.TryGetElement(_maxLevel, out fullFreq)) _fullFreq = fullFreq;
+		if (playerData.frequency.upperBounds.TryGetElement(_maxLevel, out float fullFreq)) _fullFreq = fullFreq;
 	}
 
 	private void Birth()
