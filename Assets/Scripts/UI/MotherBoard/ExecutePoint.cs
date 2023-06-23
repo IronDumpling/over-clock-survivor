@@ -52,12 +52,12 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
         // Check if specific game objects are hit
         foreach (var result in results)
         {
-            GameObject obj = result.gameObject;
+            GameObject hitObj = result.gameObject;
 
-            if (!hitObjs.Contains(obj))
+            if (!hitObjs.Contains(hitObj))
             {
-                hitObjs.Add(obj);
-                obj.transform.GetComponent<CardCell>()?.Execute();
+                hitObjs.Add(hitObj);
+                hitObj.transform.GetComponent<CardCell>()?.Execute();
             }
         }
     }
