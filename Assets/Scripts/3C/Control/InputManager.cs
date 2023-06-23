@@ -14,5 +14,8 @@ public class InputManager : MonoSingleton<InputManager>
 
         // Call MotherBroad
         if (Input.GetKeyDown(KeyCode.Space)) MotherBoardUI.Instance.HandleMotherBoard();
+
+        // Select UI Game Objects
+        if (Input.GetMouseButtonDown(0)) UIManager.Instance.HandleSelect();
     }
 }
