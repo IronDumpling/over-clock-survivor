@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using Common;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 public class Player : MonoSingleton<Player>

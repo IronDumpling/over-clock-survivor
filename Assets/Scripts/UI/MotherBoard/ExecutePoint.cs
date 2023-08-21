@@ -59,7 +59,6 @@ public class ExecutePoint : MonoSingleton<ExecutePoint>
         foreach (var result in results)
         {
             GameObject hitObj = result.gameObject;
-            
 
             if (!hitObjs.Contains(hitObj))
             {
